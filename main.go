@@ -15,9 +15,9 @@ func main() {
 	var bfp = g.BreadthFirstPaths(1)
 
 	fmt.Println(g.Vertices())
-	fmt.Println(dfs.Count)
-	fmt.Println(dfp.S)
-	fmt.Println(bfp.S)
+	fmt.Println(dfs.Count())
+	fmt.Println(dfp.HasPathTo(1))
+	fmt.Println(bfp.HasPathTo(1))
 	fmt.Println(bfp.HasPathTo(2))
 	fmt.Println(bfp.HasPathTo(4))
 }

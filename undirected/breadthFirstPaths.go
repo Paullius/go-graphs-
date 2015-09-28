@@ -1,10 +1,10 @@
 package undirected
 
 type BreadthFirstPaths struct {
-	G      *Graph
-	Marked []bool
-	EdgeTo []int
-	S      int
+	g      *Graph
+	marked []bool
+	edgeTo []int
+	s      int
 }
 
 func (g *Graph) BreadthFirstPaths(s int) BreadthFirstPaths {
@@ -19,21 +19,23 @@ func (g *Graph) BreadthFirstPaths(s int) BreadthFirstPaths {
 	return bfp
 }
 
+// Is there a path from s to v
+//TODO: move to interface
 func (bfp *BreadthFirstPaths) HasPathTo(v int) bool {
-	return bfp.Marked[v]
+	return bfp.marked[v]
 }
 
 func (bfp *BreadthFirstPaths) search(s int) {
 	queue := Queue{}
-	bfp.Marked[s] = true
+	bfp.marked[s] = true
 	queue.Push(s)
 
 	for queue.Len() > 0 {
 		var v = queue.Pop()
-		for _, w := range bfp.G.adj[v] {
-			if !bfp.Marked[w] {
-				bfp.EdgeTo[w] = v
-				bfp.Marked[w] = true
+		for _, w := range bfp.g.adj[v] {
+			if !bfp.marked[w] {
+				bfp.edgeTo[w] = v
+				bfp.marked[w] = true
 				queue.Push(w)
 			}
 		}

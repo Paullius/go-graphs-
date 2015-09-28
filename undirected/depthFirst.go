@@ -1,12 +1,13 @@
 package undirected
 
 type DepthFirst struct {
-	G      *Graph
-	Marked []bool
-	Count  int
+	g      *Graph
+	marked []bool
+	count  int
 }
 
-//s - source vertex
+// Do depth first graph search
+// s - source vertex
 func (g *Graph) DepthFirst(s int) DepthFirst {
 	df := DepthFirst{
 		g,
@@ -17,12 +18,21 @@ func (g *Graph) DepthFirst(s int) DepthFirst {
 	return df
 }
 
-//is v connected to s
+// Count of vertices connected to s
+func (df *DepthFirst) Count() int {
+	return df.count
+}
+
+// Is v connected to s
+func (df *DepthFirst) IsConnected(v int) bool {
+	return df.marked[v]
+}
+
 func (df *DepthFirst) search(v int) {
-	df.Marked[v] = true
-	df.Count++
-	for _, w := range df.G.adj[v] {
-		if !df.Marked[w] {
+	df.marked[v] = true
+	df.count++
+	for _, w := range df.g.adj[v] {
+		if !df.marked[w] {
 			df.search(w)
 		}
 	}
