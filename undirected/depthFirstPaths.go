@@ -21,10 +21,19 @@ func depthFirstPathsSearch(dfp DepthFirstPaths, v int) {
 	dfp.DF.Marked[v] = true
 	dfp.DF.Count++
 
+<<<<<<< HEAD:undirected/DepthFirstPaths.go
 	for _, w := range dfp.DF.G.adj[v] {
 		if !dfp.DF.Marked[w] {
 			dfp.EdgeTo[w] = v
 			depthFirstPathsSearch(dfp, w)
 		}
 	}
+=======
+  for _,w := range dfp.DF.G.adj[v] {
+     if(!dfp.DF.Marked[w]) {
+     	dfp.EdgeTo[w] = v
+     	depthFirstPathsSearch(dfp,w)
+     }
+  }
+>>>>>>> origin/master:undirected/depthFirstPaths.go
 }
