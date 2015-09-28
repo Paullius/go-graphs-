@@ -1,4 +1,3 @@
- 
 package undirected
 
 type Graph struct {
@@ -6,7 +5,9 @@ type Graph struct {
 	adj [][]int
 }
 
-func Create(v int) Graph {
+
+
+func CreateGraph(v int) Graph {
   var g Graph
   g.V =v
   g.E = 0
