@@ -1,26 +1,24 @@
 package undirected
 
 type Graph struct {
-	V,E int
-	adj [][]int
+	V, E int
+	adj  [][]int
 }
-
-
 
 func CreateGraph(v int) Graph {
-  var g Graph
-  g.V =v
-  g.E = 0
-  g.adj = make([][]int,v)
-  return g
+	var g Graph
+	g.V = v
+	g.E = 0
+	g.adj = make([][]int, v)
+	return g
 }
 
-func AddEdge(v int, w int, g Graph) {
-	g.adj[v] = append(g.adj[v],w)
-	g.adj[w] = append(g.adj[w],v)
+func (g *Graph) AddEdge(v int, w int) {
+	g.adj[v] = append(g.adj[v], w)
+	g.adj[w] = append(g.adj[w], v)
 	g.E += g.E
 }
 
-func Adj(v int, g Graph) []int {
-  return g.adj[v]
+func (g *Graph) Adj(v int) []int {
+	return g.adj[v]
 }

@@ -17,13 +17,13 @@ func (q *Queue) Len() int {
 }
 
 type BreadthFirstPaths struct {
-	G      Graph
+	G      *Graph
 	Marked []bool
 	EdgeTo []int
 	S      int
 }
 
-func BreadthFirstPathsSearch(g Graph, s int) BreadthFirstPaths {
+func (g *Graph) BreadthFirstPathsSearch(s int) BreadthFirstPaths {
 	var bfp BreadthFirstPaths
 	bfp.G = g
 	bfp.Marked = make([]bool, g.V)
@@ -32,6 +32,10 @@ func BreadthFirstPathsSearch(g Graph, s int) BreadthFirstPaths {
 
 	breadthFirstSearch(bfp, s)
 	return bfp
+}
+
+func (bfp *BreadthFirstPaths) HasPathTo(v int) bool {
+	return bfp.Marked[v]
 }
 
 func breadthFirstSearch(bfp BreadthFirstPaths, s int) {

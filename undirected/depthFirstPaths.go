@@ -6,9 +6,9 @@ type DepthFirstPaths struct {
 	S      int // source
 }
 
-func DepthFirstPathsSearch(g Graph, s int) DepthFirstPaths {
+func (g *Graph) DepthFirstPathsSearch(s int) DepthFirstPaths {
 	var dfp DepthFirstPaths
-	dfp.DF = DepthFirstSearch(g, s)
+	dfp.DF = g.DepthFirstSearch(s)
 	dfp.EdgeTo = make([]int, g.V)
 	dfp.S = s
 
