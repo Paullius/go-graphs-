@@ -15,7 +15,7 @@ func (g *Graph) BreadthFirstPaths(s int) BreadthFirstPaths {
 		s,
 	}
 
-	bfp.breadthFirstSearch(s)
+	bfp.search(s)
 	return bfp
 }
 
@@ -23,7 +23,7 @@ func (bfp *BreadthFirstPaths) HasPathTo(v int) bool {
 	return bfp.Marked[v]
 }
 
-func (bfp *BreadthFirstPaths) breadthFirstSearch(s int) {
+func (bfp *BreadthFirstPaths) search(s int) {
 	queue := Queue{}
 	bfp.Marked[s] = true
 	queue.Push(s)
