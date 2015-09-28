@@ -13,17 +13,17 @@ func (g *Graph) DepthFirst(s int) DepthFirst {
 		make([]bool, g.v),
 		0,
 	}
-	depthFirstSearch(df, s)
+	df.search(s)
 	return df
 }
 
 //is v connected to s
-func depthFirstSearch(df DepthFirst, v int) {
+func (df *DepthFirst) search(v int) {
 	df.Marked[v] = true
 	df.Count++
 	for _, w := range df.G.adj[v] {
 		if !df.Marked[w] {
-			depthFirstSearch(df, w)
+			df.search(w)
 		}
 	}
 }

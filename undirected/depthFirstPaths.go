@@ -12,17 +12,17 @@ func (g *Graph) DepthFirstPaths(s int) DepthFirstPaths {
 		make([]int, g.v),
 		s,
 	}
-	depthFirstPathsSearch(dfp, s)
+	dfp.depthFirstPathsSearch(s)
 	return dfp
 }
 
-func depthFirstPathsSearch(dfp DepthFirstPaths, v int) {
+func (dfp *DepthFirstPaths) depthFirstPathsSearch(v int) {
 	dfp.DF.Marked[v] = true
 	dfp.DF.Count++
 	for _, w := range dfp.DF.G.adj[v] {
 		if !dfp.DF.Marked[w] {
 			dfp.EdgeTo[w] = v
-			depthFirstPathsSearch(dfp, w)
+			dfp.depthFirstPathsSearch(w)
 		}
 	}
 }

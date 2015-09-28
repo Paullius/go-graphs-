@@ -32,15 +32,11 @@ func (g *Graph) AdjacentTo(v int) []int {
 	return g.adj[v]
 }
 
-func (g *Graph) Degree(int v) int {
-	degree := 0
-	for _, w := range g.adj[v] {
-		degree++
-	}
-	return degree
+func (g *Graph) Degree(v int) int {
+	return len(g.adj[v])
 }
 
-func (g *Graph) NumberOfSelfLoops() {
+func (g *Graph) NumberOfSelfLoops() int {
 	count := 0
 	for v := 0; v < g.v; v++ {
 		for _, w := range g.adj[v] {
