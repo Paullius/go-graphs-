@@ -1,52 +1,52 @@
 package undirected
 
-type Queue []int 
+type Queue []int
 
 func (q *Queue) Push(n int) {
-    *q = append(*q, n)
+	*q = append(*q, n)
 }
 
 func (q *Queue) Pop() (n int) {
-    n = (*q)[0]
-    *q = (*q)[1:]
-    return
+	n = (*q)[0]
+	*q = (*q)[1:]
+	return
 }
 
 func (q *Queue) Len() int {
-    return len(*q)
+	return len(*q)
 }
 
 type BreadthFirstPaths struct {
-  G Graph
-  Marked [] bool
-  EdgeTo []int 
-  S int
+	G      Graph
+	Marked []bool
+	EdgeTo []int
+	S      int
 }
-
 
 func BreadthFirstPathsSearch(g Graph, s int) BreadthFirstPaths {
 	var bfp BreadthFirstPaths
-    bfp.Marked = make([]bool,g.V)
-	bfp.EdgeTo = make([]int,g.V)
-    bfp.S = s
+	bfp.G = g
+	bfp.Marked = make([]bool, g.V)
+	bfp.EdgeTo = make([]int, g.V)
+	bfp.S = s
 
-    breadthFirstSearch(bfp, s)
-    return bfp
+	breadthFirstSearch(bfp, s)
+	return bfp
 }
 
-func breadthFirstSearch(bfp BreadthFirstPaths, s int)  {
-    queue := Queue{}
-    bfp.Marked[s] = true
-    queue.Push(s)
+func breadthFirstSearch(bfp BreadthFirstPaths, s int) {
+	queue := Queue{}
+	bfp.Marked[s] = true
+	queue.Push(s)
 
-    for queue.Len() > 0 {
-         var v = queue.Pop()
-	     for _,w := range bfp.G.adj[v] {
-	     	if(!bfp.Marked[w]) {
-		     	bfp.EdgeTo[w] = v
-		     	bfp.Marked[w] = true
-		     	queue.Push(w)
-		     }
-		  }
-    }
+	for queue.Len() > 0 {
+		var v = queue.Pop()
+		for _, w := range bfp.G.adj[v] {
+			if !bfp.Marked[w] {
+				bfp.EdgeTo[w] = v
+				bfp.Marked[w] = true
+				queue.Push(w)
+			}
+		}
+	}
 }
