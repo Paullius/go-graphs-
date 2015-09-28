@@ -8,11 +8,12 @@ type DepthFirst struct {
 
 //s - source vertex
 func (g *Graph) DepthFirstSearch(s int) DepthFirst {
-	var df DepthFirst
-	df.G = g
-	df.Marked = make([]bool, g.V)
+	df := DepthFirst{
+		g,
+		make([]bool, g.V),
+		0,
+	}
 	depthFirstSearch(df, s)
-
 	return df
 }
 
@@ -20,7 +21,6 @@ func (g *Graph) DepthFirstSearch(s int) DepthFirst {
 func depthFirstSearch(df DepthFirst, v int) {
 	df.Marked[v] = true
 	df.Count++
-
 	for _, w := range df.G.adj[v] {
 		if !df.Marked[w] {
 			depthFirstSearch(df, w)

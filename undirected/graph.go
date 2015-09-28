@@ -6,10 +6,11 @@ type Graph struct {
 }
 
 func CreateGraph(v int) Graph {
-	var g Graph
-	g.V = v
-	g.E = 0
-	g.adj = make([][]int, v)
+	g := Graph{
+		v,
+		0,
+		make([][]int, v),
+	}
 	return g
 }
 

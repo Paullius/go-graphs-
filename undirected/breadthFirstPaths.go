@@ -8,11 +8,12 @@ type BreadthFirstPaths struct {
 }
 
 func (g *Graph) BreadthFirstPathsSearch(s int) BreadthFirstPaths {
-	var bfp BreadthFirstPaths
-	bfp.G = g
-	bfp.Marked = make([]bool, g.V)
-	bfp.EdgeTo = make([]int, g.V)
-	bfp.S = s
+	bfp := BreadthFirstPaths{
+		g,
+		make([]bool, g.V),
+		make([]int, g.V),
+		s,
+	}
 
 	breadthFirstSearch(bfp, s)
 	return bfp
