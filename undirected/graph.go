@@ -1,11 +1,11 @@
 package undirected
 
 type Graph struct {
-	V, E int
+	v, e int
 	adj  [][]int
 }
 
-func CreateGraph(v int) Graph {
+func NewGraph(v int) Graph {
 	g := Graph{
 		v,
 		0,
@@ -14,12 +14,40 @@ func CreateGraph(v int) Graph {
 	return g
 }
 
+func (g *Graph) Vertices() int {
+	return g.v
+}
+
+func (g *Graph) Edges() int {
+	return g.e
+}
+
 func (g *Graph) AddEdge(v int, w int) {
 	g.adj[v] = append(g.adj[v], w)
 	g.adj[w] = append(g.adj[w], v)
-	g.E += g.E
+	g.e += g.e
 }
 
-func (g *Graph) Adj(v int) []int {
+func (g *Graph) AdjacentTo(v int) []int {
 	return g.adj[v]
+}
+
+func (g *Graph) Degree(int v) int {
+	degree := 0
+	for _, w := range g.adj[v] {
+		degree++
+	}
+	return degree
+}
+
+func (g *Graph) NumberOfSelfLoops() {
+	count := 0
+	for v := 0; v < g.v; v++ {
+		for _, w := range g.adj[v] {
+			if v == w {
+				count++
+			}
+		}
+	}
+	return count / 2
 }

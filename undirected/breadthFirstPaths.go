@@ -7,11 +7,11 @@ type BreadthFirstPaths struct {
 	S      int
 }
 
-func (g *Graph) BreadthFirstPathsSearch(s int) BreadthFirstPaths {
+func (g *Graph) BreadthFirstPaths(s int) BreadthFirstPaths {
 	bfp := BreadthFirstPaths{
 		g,
-		make([]bool, g.V),
-		make([]int, g.V),
+		make([]bool, g.v),
+		make([]int, g.v),
 		s,
 	}
 

@@ -7,10 +7,10 @@ type DepthFirst struct {
 }
 
 //s - source vertex
-func (g *Graph) DepthFirstSearch(s int) DepthFirst {
+func (g *Graph) DepthFirst(s int) DepthFirst {
 	df := DepthFirst{
 		g,
-		make([]bool, g.V),
+		make([]bool, g.v),
 		0,
 	}
 	depthFirstSearch(df, s)

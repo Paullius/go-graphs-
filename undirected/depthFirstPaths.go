@@ -6,10 +6,10 @@ type DepthFirstPaths struct {
 	S      int // source
 }
 
-func (g *Graph) DepthFirstPathsSearch(s int) DepthFirstPaths {
+func (g *Graph) DepthFirstPaths(s int) DepthFirstPaths {
 	dfp := DepthFirstPaths{
-		g.DepthFirstSearch(s),
-		make([]int, g.V),
+		g.DepthFirst(s),
+		make([]int, g.v),
 		s,
 	}
 	depthFirstPathsSearch(dfp, s)

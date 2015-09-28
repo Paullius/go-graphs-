@@ -6,15 +6,15 @@ import (
 )
 
 func main() {
-	var g = undirected.CreateGraph(5)
+	var g = undirected.NewGraph(5)
 	g.AddEdge(1, 2)
 	g.AddEdge(1, 3)
 	g.AddEdge(2, 3)
-	var dfs = g.DepthFirstSearch(2)
-	var dfp = g.DepthFirstPathsSearch(2)
-	var bfp = g.BreadthFirstPathsSearch(1)
+	var dfs = g.DepthFirst(2)
+	var dfp = g.DepthFirstPaths(2)
+	var bfp = g.BreadthFirstPaths(1)
 
-	fmt.Println(g.V)
+	fmt.Println(g.Vertices())
 	fmt.Println(dfs.Count)
 	fmt.Println(dfp.S)
 	fmt.Println(bfp.S)
