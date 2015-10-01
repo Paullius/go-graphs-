@@ -19,7 +19,7 @@ func (g *Graph) DepthFirst(s int) DepthFirst {
 }
 
 // Count of vertices connected to s
-func (df *DepthFirst) Count() int {
+func (df *DepthFirst) ConnectedCount() int {
 	return df.count
 }
 

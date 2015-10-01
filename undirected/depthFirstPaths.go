@@ -1,29 +1,34 @@
 package undirected
 
 type DepthFirstPaths struct {
-	df     DepthFirst
+	g      *Graph
+	marked []bool
 	edgeTo []int
 	s      int // source
+	count  int
 }
 
 func (g *Graph) DepthFirstPaths(s int) DepthFirstPaths {
 	dfp := DepthFirstPaths{
-		g.DepthFirst(s),
+		g,
+		make([]bool, g.v),
 		make([]int, g.v),
 		s,
+		0,
 	}
 	dfp.search(s)
 	return dfp
 }
 
-func (dfp *DepthFirstPaths) DF() DepthFirst {
-	return dfp.df
+// Count of vertices connected to s
+func (dfp *DepthFirstPaths) ConnectedCount() int {
+	return dfp.count
 }
 
 // Is there a path from s to v
 //TODO: move to interface
 func (dfp *DepthFirstPaths) HasPathTo(v int) bool {
-	return dfp.df.marked[v]
+	return dfp.marked[v]
 }
 
 // Path from s to v
@@ -40,10 +45,10 @@ func (dfp *DepthFirstPaths) PathTo(v int) []int {
 }
 
 func (dfp *DepthFirstPaths) search(v int) {
-	dfp.df.marked[v] = true
-	dfp.df.count++
-	for _, w := range dfp.df.g.adj[v] {
-		if !dfp.df.marked[w] {
+	dfp.marked[v] = true
+	dfp.count++
+	for _, w := range dfp.g.adj[v] {
+		if !dfp.marked[w] {
 			dfp.edgeTo[w] = v
 			dfp.search(w)
 		}

@@ -10,16 +10,21 @@ func main() {
 	g.AddEdge(1, 2)
 	g.AddEdge(1, 3)
 	g.AddEdge(2, 3)
+
+	fmt.Printf("Count of self loops: %d\n", g.NumberOfSelfLoops())
+
 	var dfs = g.DepthFirst(2)
 	var dfp = g.DepthFirstPaths(2)
 	var bfp = g.BreadthFirstPaths(1)
 
-	fmt.Println(g.Vertices())
-	fmt.Println(dfs.Count())
+	fmt.Printf("Count of vertices: %d\n", g.Vertices())
+	fmt.Printf("Count of vertices connected to s: %d\n", dfs.ConnectedCount())
 	fmt.Println(dfp.HasPathTo(1))
 	fmt.Println(bfp.HasPathTo(1))
 	fmt.Println(bfp.HasPathTo(2))
 	fmt.Println(bfp.HasPathTo(4))
+
 }
 
 //go install github.com/paullius/go-graphs-
+//go test github.com/paullius/go-graphs-\undirected
