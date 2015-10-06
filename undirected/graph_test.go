@@ -14,7 +14,7 @@ func TestNewGraphVertices(t *testing.T) {
 		{0, 0},
 	}
 	for _, c := range cases {
-		graph := NewGraph(c.in)
+		graph := undirected.NewGraph(c.in)
 		got := graph.Vertices()
 		if got != c.want {
 			t.Errorf("NewGraph(%v) == %v, want %v", c.in, got, c.want)
@@ -29,8 +29,8 @@ func TestNewGraphEdges(t *testing.T) {
 	}
 }
 
-func createTestGraph() Graph {
-	g := NewGraph(7)
+func createTestGraph() undirected.Graph {
+	g := undirected.NewGraph(7)
 	g.AddEdge(0, 2)
 	g.AddEdge(0, 3)
 	g.AddEdge(1, 3)
