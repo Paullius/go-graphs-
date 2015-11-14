@@ -1,4 +1,4 @@
-package undirected
+package collections
 
 type Queue []int
 

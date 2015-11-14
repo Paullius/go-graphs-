@@ -1,5 +1,9 @@
 package undirected
 
+import (
+	"github.com/paullius/go-graphs-/collections"
+)
+
 type BreadthFirstPaths struct {
 	g      *Graph
 	marked []bool
@@ -26,7 +30,7 @@ func (bfp *BreadthFirstPaths) HasPathTo(v int) bool {
 }
 
 func (bfp *BreadthFirstPaths) search(s int) {
-	queue := Queue{}
+	queue := collections.Queue{}
 	bfp.marked[s] = true
 	queue.Push(s)
 

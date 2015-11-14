@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/paullius/go-graphs-/directed"
 	"github.com/paullius/go-graphs-/undirected"
 )
 
@@ -24,6 +25,10 @@ func main() {
 	fmt.Println(bfp.HasPathTo(2))
 	fmt.Println(bfp.HasPathTo(4))
 
+	var dg = directed.NewDigraph(5)
+	dg.AddEdge(1, 2)
+	dg.AddEdge(1, 3)
+	dg.AddEdge(2, 3)
 }
 
 //go install github.com/paullius/go-graphs-

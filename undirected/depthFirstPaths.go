@@ -1,5 +1,9 @@
 package undirected
 
+import (
+	"github.com/paullius/go-graphs-/collections"
+)
+
 type DepthFirstPaths struct {
 	g      *Graph
 	marked []bool
@@ -36,7 +40,7 @@ func (dfp *DepthFirstPaths) PathTo(v int) []int {
 	if !dfp.HasPathTo(v) {
 		return []int{}
 	}
-	path := Stack{}
+	path := collections.Stack{}
 	for x := v; x != dfp.s; x = dfp.edgeTo[x] {
 		path.Push(x)
 	}
