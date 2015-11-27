@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/paullius/go-graphs-/directed"
 	"github.com/paullius/go-graphs-/undirected"
+	"github.com/paullius/go-graphs-/weighted"
 )
 
 func main() {
@@ -29,6 +30,9 @@ func main() {
 	dg.AddEdge(1, 2)
 	dg.AddEdge(1, 3)
 	dg.AddEdge(2, 3)
+
+	weighted.NewEdge(1, 2, 1.0)
+
 }
 
 //go install github.com/paullius/go-graphs-
