@@ -1,12 +1,12 @@
 package collections
 
-type Queue []int
+type Queue []interface{}
 
-func (q *Queue) Push(n int) {
+func (q *Queue) Push(n interface{}) {
 	*q = append(*q, n)
 }
 
-func (q *Queue) Pop() (n int) {
+func (q *Queue) Pop() (n interface{}) {
 	n = (*q)[0]
 	*q = (*q)[1:]
 	return

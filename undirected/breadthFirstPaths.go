@@ -35,7 +35,7 @@ func (bfp *BreadthFirstPaths) search(s int) {
 	queue.Push(s)
 
 	for queue.Len() > 0 {
-		var v = queue.Pop()
+		v := queue.Pop().(int)
 		for _, w := range bfp.g.adj[v] {
 			if !bfp.marked[w] {
 				bfp.edgeTo[w] = v
