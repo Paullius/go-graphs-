@@ -36,6 +36,9 @@ func main() {
 	wg.AddEdge(we)
 	var wes = wg.Edges()
 	fmt.Println(wes[0].Weight())
+	var lpm = weighted.NewLazyPrimMst(wg)
+	fmt.Println(lpm.Edges())
+
 }
 
 //go install github.com/paullius/go-graphs-

@@ -44,8 +44,17 @@ func (pq *PriorityQueue) Pop() interface{} {
 	return item
 }
 
+func (pq *PriorityQueue) Contains(x interface{}) bool {
+	for i := 0; i < pq.Len(); i++ {
+		if pq[i] == x {
+			return true
+		}
+	}
+	return false
+}
+
 // update modifies the priority and value of an Item in the queue.
-func (pq *PriorityQueue) update(item *Item, value string, priority int) {
+func (pq *PriorityQueue) Update(item *Item, value string, priority int) {
 	item.value = value
 	item.priority = priority
 	heap.Fix(pq, item.index)
