@@ -31,8 +31,11 @@ func main() {
 	dg.AddEdge(1, 3)
 	dg.AddEdge(2, 3)
 
-	weighted.NewEdge(1, 2, 1.0)
-
+	var we = weighted.NewEdge(1, 2, 1.2)
+	var wg = weighted.NewEdgeWeightedGraph(3)
+	wg.AddEdge(we)
+	var wes = wg.Edges()
+	fmt.Println(wes[0].Weight())
 }
 
 //go install github.com/paullius/go-graphs-
