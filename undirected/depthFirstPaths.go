@@ -45,7 +45,16 @@ func (dfp *DepthFirstPaths) PathTo(v int) []int {
 		path.Push(x)
 	}
 	path.Push(dfp.s)
-	return path
+
+	return convert(path)
+}
+
+func convert(st collections.Stack) []int {
+	b := make([]int, len(st))
+	for i := range st {
+		b[i] = st[i].(int)
+	}
+	return b
 }
 
 func (dfp *DepthFirstPaths) search(v int) {

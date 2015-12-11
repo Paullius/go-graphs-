@@ -1,12 +1,12 @@
 package collections
 
-type Stack []int
+type Stack []interface{}
 
-func (q *Stack) Push(n int) {
+func (q *Stack) Push(n interface{}) {
 	*q = append(*q, n)
 }
 
-func (q *Stack) Pop() (n int) {
+func (q *Stack) Pop() (n interface{}) {
 	x := q.Len() - 1
 	n = (*q)[x]
 	*q = (*q)[:x]

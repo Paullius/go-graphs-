@@ -9,7 +9,7 @@ import (
 type DijkstraShortestPaths struct {
 	edgeTo []DirectedEdge
 	distTo []float32
-	pq     collections.PriorityQueue
+	pq     collections.IndexMinPriorityQueue
 }
 
 func NewDijkstraShortestPaths(g EdgeWeightedDigraph, s int) DijkstraShortestPaths {
@@ -17,7 +17,7 @@ func NewDijkstraShortestPaths(g EdgeWeightedDigraph, s int) DijkstraShortestPath
 	l := DijkstraShortestPaths{
 		edgeTo: make([]DirectedEdge, g.v),
 		distTo: make([]float32, g.v),
-		pq:     collections.PriorityQueue{}}
+		pq:     collections.IndexMinPriorityQueue{}}
 
 	heap.Init(&l.pq)
 
@@ -44,8 +44,7 @@ func (sp *DijkstraShortestPaths) relax( g EdgeWeightedDigraph,  v int)
 			sp.distTo[w] = sp.distTo[v] + e.weight()
 			sp.edgeTo[w] = e
 		if sp.pq.Contains(w) {
-			heap.
-			sp.pq.change(w, sp.distTo[w])
+			sp.pq.Change(w, sp.distTo[w])
 		}
 		else {
 			sp.pq.insert(w, sp.distTo[w])
@@ -53,14 +52,29 @@ func (sp *DijkstraShortestPaths) relax( g EdgeWeightedDigraph,  v int)
 	}
 }
 
-func (sp *DijkstraShortestPaths) DistTo(v int) float32 {
+func convert(st collections.Stack) []DirectedEdge {
+	b := make([]DirectedEdge, len(st))
+	for i := range st {
+		b[i] = st[i].(DirectedEdge)
+	}
+	return b
+}
 
+func (sp *DijkstraShortestPaths) DistTo(v int) float32 {
+   return sp.distTo[v]
 }
 
 func (sp *DijkstraShortestPaths) HasPathTo(v int) bool {
-
+   return sp.distTo[v] < math.Inf(1)
 }
 
 func (sp *DijkstraShortestPaths) PathTo(v int) []DirectedEdge {
+   if (!sp.hasPathTo(v)) return nil
 
+    path := collections.Stack{}
+     for e := edgeTo[v]; e != null; e = edgeTo[e.from()] {
+     	  path.push(e)
+     }
+     return convert(path) 
 }
+
