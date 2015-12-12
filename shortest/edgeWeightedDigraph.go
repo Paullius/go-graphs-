@@ -5,7 +5,7 @@ type EdgeWeightedDigraph struct {
 	adj  [][]DirectedEdge
 }
 
-func NewEdgeWeightedGraph(v int) EdgeWeightedDigraph {
+func NewEdgeWeightedDigraph(v int) EdgeWeightedDigraph {
 	g := EdgeWeightedDigraph{
 		v,
 		0,
@@ -15,7 +15,8 @@ func NewEdgeWeightedGraph(v int) EdgeWeightedDigraph {
 }
 
 func (g *EdgeWeightedDigraph) AddEdge(e DirectedEdge) {
-	g.adj[e.from()] = append(e.from(), e)
+	g.adj[e.From()] = append(g.adj[e.From()], e)
+
 	g.e++
 }
 
@@ -33,4 +34,8 @@ func (g *EdgeWeightedDigraph) Edges() []DirectedEdge {
 	}
 
 	return b
+}
+
+func (g *EdgeWeightedDigraph) V() int {
+	return g.v
 }

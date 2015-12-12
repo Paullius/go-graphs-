@@ -1,7 +1,6 @@
 package shortest
 
 import (
-	"container/heap"
 	"github.com/paullius/go-graphs-/collections"
 	"math"
 )
@@ -19,35 +18,31 @@ func NewDijkstraShortestPaths(g EdgeWeightedDigraph, s int) DijkstraShortestPath
 		distTo: make([]float32, g.v),
 		pq:     collections.IndexMinPriorityQueue{}}
 
-	heap.Init(&l.pq)
-
 	for v := 0; v < g.v; v++ {
-		distTo[v] = math.Inf(1)
+		l.distTo[v] = math.MaxFloat32
 	}
-	distTo[s] = 0.0
+	l.distTo[s] = 0.0
 
-	heap.Push(&l.pq, 0.0)
+	l.pq.Insert(s, 0.0)
 
 	for l.pq.Len() > 0 {
-		e := heap.Pop(&l.pq).(*float32)
-
+		l.relax(g, l.pq.DelMin())
 	}
+
+	return l
 }
 
-func (sp *DijkstraShortestPaths) relax( g EdgeWeightedDigraph,  v int)
-{
-	for _, e := range g.adj(v) {
-	{
-		var w = e.to();
-		if distTo[w] > distTo[v] + e.weight()
-		{
-			sp.distTo[w] = sp.distTo[v] + e.weight()
+func (sp *DijkstraShortestPaths) relax(g EdgeWeightedDigraph, v int) {
+	for _, e := range g.AdjacentTo(v) {
+		var w = e.To()
+		if sp.distTo[w] > sp.distTo[v]+e.Weight() {
+			sp.distTo[w] = sp.distTo[v] + e.Weight()
 			sp.edgeTo[w] = e
-		if sp.pq.Contains(w) {
-			sp.pq.Change(w, sp.distTo[w])
-		}
-		else {
-			sp.pq.insert(w, sp.distTo[w])
+			if sp.pq.Contains(w) {
+				sp.pq.Change(w, sp.distTo[w])
+			} else {
+				sp.pq.Insert(w, sp.distTo[w])
+			}
 		}
 	}
 }
@@ -61,20 +56,31 @@ func convert(st collections.Stack) []DirectedEdge {
 }
 
 func (sp *DijkstraShortestPaths) DistTo(v int) float32 {
-   return sp.distTo[v]
+	return sp.distTo[v]
 }
 
 func (sp *DijkstraShortestPaths) HasPathTo(v int) bool {
-   return sp.distTo[v] < math.Inf(1)
+	return sp.distTo[v] < math.MaxFloat32
 }
 
 func (sp *DijkstraShortestPaths) PathTo(v int) []DirectedEdge {
-   if (!sp.hasPathTo(v)) return nil
+	if !sp.HasPathTo(v) {
+		return nil
+	}
 
-    path := collections.Stack{}
-     for e := edgeTo[v]; e != null; e = edgeTo[e.from()] {
-     	  path.push(e)
-     }
-     return convert(path) 
+	path := collections.Stack{}
+
+	for e := sp.edgeTo[v]; !(e.From() == 0 && e.To() == 0); e = sp.edgeTo[e.From()] {
+		path.Push(e)
+	}
+
+	// l := len(sp.edgeTo)
+	// i := v
+	// for i < l {
+	// 	e := sp.edgeTo[i]
+	// 	path.Push(e)
+	// 	i = e.From()
+	// }
+
+	return convert(path)
 }
-

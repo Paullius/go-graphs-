@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/paullius/go-graphs-/directed"
+	"github.com/paullius/go-graphs-/shortest"
 	"github.com/paullius/go-graphs-/undirected"
 	"github.com/paullius/go-graphs-/weighted"
 )
@@ -39,6 +40,45 @@ func main() {
 	var lpm = weighted.NewLazyPrimMst(wg)
 	fmt.Println(lpm.Edges())
 
+	shortestPath()
+
+}
+
+func shortestPath() {
+	fmt.Println("Shortest Path:")
+	g := shortest.NewEdgeWeightedDigraph(8)
+	g.AddEdge(shortest.NewEdge(4, 5, 0.35))
+	g.AddEdge(shortest.NewEdge(5, 4, 0.35))
+	g.AddEdge(shortest.NewEdge(4, 7, 0.37))
+	g.AddEdge(shortest.NewEdge(5, 7, 0.28))
+	g.AddEdge(shortest.NewEdge(7, 5, 0.28))
+	g.AddEdge(shortest.NewEdge(5, 1, 0.32))
+	g.AddEdge(shortest.NewEdge(0, 4, 0.38))
+	g.AddEdge(shortest.NewEdge(0, 2, 0.26))
+	g.AddEdge(shortest.NewEdge(7, 3, 0.39))
+	g.AddEdge(shortest.NewEdge(1, 3, 0.29))
+	g.AddEdge(shortest.NewEdge(2, 7, 0.34))
+	g.AddEdge(shortest.NewEdge(6, 2, 0.40))
+	g.AddEdge(shortest.NewEdge(3, 6, 0.52))
+	g.AddEdge(shortest.NewEdge(6, 0, 0.58))
+	g.AddEdge(shortest.NewEdge(6, 4, 0.93))
+
+	sp := shortest.NewDijkstraShortestPaths(g, 0)
+
+	for t := 0; t < g.V(); t++ {
+		//fmt.Println("0 to " + t)
+
+		fmt.Printf("0 to %v", t)
+
+		fmt.Printf(" (%v): ", sp.DistTo(t))
+		if sp.HasPathTo(t) {
+			for _, e := range sp.PathTo(t) {
+				fmt.Printf("%v", e)
+			}
+		}
+
+		fmt.Println("")
+	}
 }
 
 //go install github.com/paullius/go-graphs-
