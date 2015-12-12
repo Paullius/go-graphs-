@@ -40,12 +40,19 @@ func main() {
 	var lpm = weighted.NewLazyPrimMst(wg)
 	fmt.Println(lpm.Edges())
 
-	shortestPath()
-
+	shortestPath(2, []int{3, 5})
 }
 
-func shortestPath() {
-	fmt.Println("Shortest Path:")
+func shortestPath(from int, to []int) {
+
+	g := createShortestPathGraph()
+	sp := shortest.NewDijkstraShortestPaths(g, from)
+	for _, t := range to {
+		sp.PrintShortestPath(t)
+	}
+}
+
+func createShortestPathGraph() shortest.EdgeWeightedDigraph {
 	g := shortest.NewEdgeWeightedDigraph(8)
 	g.AddEdge(shortest.NewEdge(4, 5, 0.35))
 	g.AddEdge(shortest.NewEdge(5, 4, 0.35))
@@ -63,22 +70,7 @@ func shortestPath() {
 	g.AddEdge(shortest.NewEdge(6, 0, 0.58))
 	g.AddEdge(shortest.NewEdge(6, 4, 0.93))
 
-	sp := shortest.NewDijkstraShortestPaths(g, 0)
-
-	for t := 0; t < g.V(); t++ {
-		//fmt.Println("0 to " + t)
-
-		fmt.Printf("0 to %v", t)
-
-		fmt.Printf(" (%v): ", sp.DistTo(t))
-		if sp.HasPathTo(t) {
-			for _, e := range sp.PathTo(t) {
-				fmt.Printf("%v", e)
-			}
-		}
-
-		fmt.Println("")
-	}
+	return g
 }
 
 //go install github.com/paullius/go-graphs-

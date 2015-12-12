@@ -1,6 +1,7 @@
 package shortest
 
 import (
+	"fmt"
 	"github.com/paullius/go-graphs-/collections"
 	"math"
 )
@@ -9,21 +10,23 @@ type DijkstraShortestPaths struct {
 	edgeTo []DirectedEdge
 	distTo []float32
 	pq     collections.IndexMinPriorityQueue
+	from   int
 }
 
-func NewDijkstraShortestPaths(g EdgeWeightedDigraph, s int) DijkstraShortestPaths {
+func NewDijkstraShortestPaths(g EdgeWeightedDigraph, from int) DijkstraShortestPaths {
 
 	l := DijkstraShortestPaths{
 		edgeTo: make([]DirectedEdge, g.v),
 		distTo: make([]float32, g.v),
-		pq:     collections.IndexMinPriorityQueue{}}
+		pq:     collections.IndexMinPriorityQueue{},
+		from:   from}
 
 	for v := 0; v < g.v; v++ {
 		l.distTo[v] = math.MaxFloat32
 	}
-	l.distTo[s] = 0.0
+	l.distTo[from] = 0.0
 
-	l.pq.Insert(s, 0.0)
+	l.pq.Insert(from, 0.0)
 
 	for l.pq.Len() > 0 {
 		l.relax(g, l.pq.DelMin())
@@ -83,4 +86,17 @@ func (sp *DijkstraShortestPaths) PathTo(v int) []DirectedEdge {
 	// }
 
 	return convert(path)
+}
+
+func (sp *DijkstraShortestPaths) PrintShortestPath(to int) {
+	fmt.Println("Dijkstra’s Shortest Path:")
+	fmt.Printf("%v to %v", sp.from, to)
+
+	fmt.Printf(" (%v): ", sp.DistTo(to))
+	if sp.HasPathTo(to) {
+		for _, e := range sp.PathTo(to) {
+			fmt.Printf("%v", e)
+		}
+	}
+	fmt.Println()
 }
