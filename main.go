@@ -40,37 +40,7 @@ func main() {
 	var lpm = weighted.NewLazyPrimMst(wg)
 	fmt.Println(lpm.Edges())
 
-	shortestPath(2, []int{3, 5})
-}
-
-func shortestPath(from int, to []int) {
-
-	g := createShortestPathGraph()
-	sp := shortest.NewDijkstraShortestPaths(g, from)
-	for _, t := range to {
-		sp.PrintShortestPath(t)
-	}
-}
-
-func createShortestPathGraph() shortest.EdgeWeightedDigraph {
-	g := shortest.NewEdgeWeightedDigraph(8)
-	g.AddEdge(shortest.NewEdge(4, 5, 0.35))
-	g.AddEdge(shortest.NewEdge(5, 4, 0.35))
-	g.AddEdge(shortest.NewEdge(4, 7, 0.37))
-	g.AddEdge(shortest.NewEdge(5, 7, 0.28))
-	g.AddEdge(shortest.NewEdge(7, 5, 0.28))
-	g.AddEdge(shortest.NewEdge(5, 1, 0.32))
-	g.AddEdge(shortest.NewEdge(0, 4, 0.38))
-	g.AddEdge(shortest.NewEdge(0, 2, 0.26))
-	g.AddEdge(shortest.NewEdge(7, 3, 0.39))
-	g.AddEdge(shortest.NewEdge(1, 3, 0.29))
-	g.AddEdge(shortest.NewEdge(2, 7, 0.34))
-	g.AddEdge(shortest.NewEdge(6, 2, 0.40))
-	g.AddEdge(shortest.NewEdge(3, 6, 0.52))
-	g.AddEdge(shortest.NewEdge(6, 0, 0.58))
-	g.AddEdge(shortest.NewEdge(6, 4, 0.93))
-
-	return g
+	shortest.DijkstrasExample(0, []int{1, 2, 3, 4, 5, 6, 7})
 }
 
 //go install github.com/paullius/go-graphs-

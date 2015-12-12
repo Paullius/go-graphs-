@@ -73,30 +73,25 @@ func (sp *DijkstraShortestPaths) PathTo(v int) []DirectedEdge {
 
 	path := collections.Stack{}
 
-	for e := sp.edgeTo[v]; !(e.From() == 0 && e.To() == 0); e = sp.edgeTo[e.From()] {
+	for e := sp.edgeTo[v]; e.Initialized(); e = sp.edgeTo[e.From()] {
 		path.Push(e)
 	}
-
-	// l := len(sp.edgeTo)
-	// i := v
-	// for i < l {
-	// 	e := sp.edgeTo[i]
-	// 	path.Push(e)
-	// 	i = e.From()
-	// }
 
 	return convert(path)
 }
 
-func (sp *DijkstraShortestPaths) PrintShortestPath(to int) {
+func (sp *DijkstraShortestPaths) PrintShortestPath(to []int) {
 	fmt.Println("Dijkstra’s Shortest Path:")
-	fmt.Printf("%v to %v", sp.from, to)
 
-	fmt.Printf(" (%v): ", sp.DistTo(to))
-	if sp.HasPathTo(to) {
-		for _, e := range sp.PathTo(to) {
-			fmt.Printf("%v", e)
+	for _, t := range to {
+		fmt.Printf("%v to %v", sp.from, t)
+
+		fmt.Printf(" (%v): ", sp.DistTo(t))
+		if sp.HasPathTo(t) {
+			for _, e := range sp.PathTo(t) {
+				fmt.Printf("%v", e)
+			}
 		}
+		fmt.Println()
 	}
-	fmt.Println()
 }

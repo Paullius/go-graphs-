@@ -22,3 +22,7 @@ func (e *DirectedEdge) From() int {
 func (e *DirectedEdge) To() int {
 	return e.w
 }
+
+func (e *DirectedEdge) Initialized() bool {
+	return e.v != 0 || e.w != 0
+}
