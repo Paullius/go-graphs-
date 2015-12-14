@@ -32,14 +32,6 @@ func main() {
 	dg.AddEdge(1, 3)
 	dg.AddEdge(2, 3)
 
-	var we = weighted.NewEdge(1, 2, 1.2)
-	var wg = weighted.NewEdgeWeightedGraph(3)
-	wg.AddEdge(we)
-	var wes = wg.Edges()
-	fmt.Println(wes[0].Weight())
-	var lpm = weighted.NewLazyPrimMst(wg)
-	fmt.Println(lpm.Edges())
-
 	weighted.PrimMstExample()
 
 	shortest.DijkstrasExample(0, []int{1, 2, 3, 4, 5, 6, 7})
