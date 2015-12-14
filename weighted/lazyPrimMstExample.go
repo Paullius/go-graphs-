@@ -2,12 +2,12 @@ package weighted
 
 func LazyPrimMstExample() {
 
-	g := createEdgeWeightedGraph()
+	g := createLazyEdgeWeightedGraph()
 	sp := NewLazyPrimMst(g)
 	sp.PrintMinimumSpanningTree()
 }
 
-func createEdgeWeightedGraph() EdgeWeightedGraph {
+func createLazyEdgeWeightedGraph() EdgeWeightedGraph {
 	g := NewEdgeWeightedGraph(8)
 	g.AddEdge(NewEdge(4, 5, 0.35))
 	g.AddEdge(NewEdge(4, 7, 0.37))
