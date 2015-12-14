@@ -40,7 +40,10 @@ func main() {
 	var lpm = weighted.NewLazyPrimMst(wg)
 	fmt.Println(lpm.Edges())
 
+	weighted.PrimMstExample()
+
 	shortest.DijkstrasExample(0, []int{1, 2, 3, 4, 5, 6, 7})
+
 }
 
 //go install github.com/paullius/go-graphs-

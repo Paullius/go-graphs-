@@ -55,3 +55,7 @@ func (pq *IndexMinPriorityQueue) Change(i int, value float32) bool {
 	}
 	return false
 }
+
+func (pq *IndexMinPriorityQueue) IsEmpty() bool {
+	return len(*pq) == 0
+}

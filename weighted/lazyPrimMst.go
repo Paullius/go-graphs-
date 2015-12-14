@@ -1,28 +1,26 @@
 package weighted
 
 import (
-	"container/heap"
+	"fmt"
 	"github.com/paullius/go-graphs-/collections"
 )
 
 type LazyPrimMst struct {
 	marked []bool
 	mst    collections.Queue // MST edges
-	pq     collections.PriorityQueue
+	pq     PriorityQueue
 }
 
 func NewLazyPrimMst(g EdgeWeightedGraph) LazyPrimMst {
 	l := LazyPrimMst{
 		marked: make([]bool, g.v),
 		mst:    collections.Queue{},
-		pq:     collections.PriorityQueue{}}
-
-	heap.Init(&l.pq)
+		pq:     PriorityQueue{}}
 
 	l.visit(g, 0)
 
-	for l.pq.Len() > 0 {
-		e := heap.Pop(&l.pq).(*Edge)
+	for !l.pq.IsEmpty() {
+		e := l.pq.DelMin()
 		v := e.AnyVertex()
 		w := e.OtherVertex(v)
 		if l.marked[v] && l.marked[w] {
@@ -45,18 +43,38 @@ func (l *LazyPrimMst) visit(g EdgeWeightedGraph, v int) {
 	l.marked[v] = true
 
 	for _, e := range g.AdjacentTo(v) {
-		if l.marked[e.OtherVertex(v)] {
-			heap.Push(&l.pq, e)
+		if !l.marked[e.OtherVertex(v)] {
+			l.pq.Insert(&e)
 		}
 	}
 
 }
 
 func (l *LazyPrimMst) Edges() []Edge {
-	edges := make([]Edge, len(l.mst))
+	edges := make([]Edge, l.mst.Len())
 	for i, e := range l.mst {
-		edges[i] = e.(Edge)
+		edges[i] = *e.(*Edge)
 	}
 
 	return edges
+}
+
+func (l *LazyPrimMst) Weight() float32 {
+	var weight float32 = 0.0
+	for _, edge := range l.Edges() {
+		weight += edge.weight
+	}
+
+	return weight
+}
+
+func (l *LazyPrimMst) PrintMinimumSpanningTree() {
+	fmt.Println("Lazy version of Prim’s MST:")
+	for _, e := range l.Edges() {
+		fmt.Printf("%v", e)
+	}
+
+	fmt.Println()
+
+	fmt.Println(l.Weight())
 }
