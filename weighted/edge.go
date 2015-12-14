@@ -11,14 +11,6 @@ func NewEdge(v int, w int, weight float32) Edge {
 	return e
 }
 
-func (e *Edge) AnyVertex() int {
-	return e.v
-}
-
-func (e *Edge) Weight() float32 {
-	return e.weight
-}
-
 func (e *Edge) OtherVertex(vertex int) int {
 	if vertex == e.v {
 		return e.w
@@ -29,6 +21,18 @@ func (e *Edge) OtherVertex(vertex int) int {
 	return -1
 }
 
+func (e *Edge) Weight() float32 {
+	return e.weight
+}
+
+func (e *Edge) From() int {
+	return e.v
+}
+
+func (e *Edge) To() int {
+	return e.w
+}
+
 func (e *Edge) CompareTo(edge *Edge) int {
 	if e.Weight() < edge.Weight() {
 		return -1
@@ -37,4 +41,8 @@ func (e *Edge) CompareTo(edge *Edge) int {
 	} else {
 		return 0
 	}
+}
+
+func (e *Edge) Initialized() bool {
+	return e.v != 0 || e.w != 0
 }

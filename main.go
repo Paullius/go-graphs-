@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/paullius/go-graphs-/directed"
-	"github.com/paullius/go-graphs-/shortest"
 	"github.com/paullius/go-graphs-/undirected"
-	"github.com/paullius/go-graphs-/weighted"
+	"github.com/paullius/go-graphs-/weighted/minimumSpanningTree"
+	"github.com/paullius/go-graphs-/weighted/shortestPaths"
 )
 
 func main() {
@@ -32,9 +32,9 @@ func main() {
 	dg.AddEdge(1, 3)
 	dg.AddEdge(2, 3)
 
-	weighted.PrimMstExample()
+	minimumSpanningTree.PrimMstExample()
 
-	shortest.DijkstrasExample(0, []int{1, 2, 3, 4, 5, 6, 7})
+	shortestPaths.DijkstrasExample(0, []int{1, 2, 3, 4, 5, 6, 7})
 
 }
 

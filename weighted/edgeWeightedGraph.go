@@ -14,8 +14,12 @@ func NewEdgeWeightedGraph(v int) EdgeWeightedGraph {
 	return g
 }
 
+func (g *EdgeWeightedGraph) V() int {
+	return g.v
+}
+
 func (g *EdgeWeightedGraph) AddEdge(e Edge) {
-	v := e.AnyVertex()
+	v := e.From()
 	w := e.OtherVertex(v)
 
 	g.adj[v] = append(g.adj[v], e)

@@ -1,8 +1,9 @@
-package weighted
+package minimumSpanningTree
 
 import (
 	"fmt"
 	"github.com/paullius/go-graphs-/collections"
+	"github.com/paullius/go-graphs-/weighted"
 )
 
 type LazyPrimMst struct {
@@ -11,17 +12,17 @@ type LazyPrimMst struct {
 	pq     collections.PriorityQueue
 }
 
-func NewLazyPrimMst(g EdgeWeightedGraph) LazyPrimMst {
+func NewLazyPrimMst(g weighted.EdgeWeightedGraph) LazyPrimMst {
 	l := LazyPrimMst{
-		marked: make([]bool, g.v),
+		marked: make([]bool, g.V()),
 		mst:    collections.Queue{},
 		pq:     collections.PriorityQueue{}}
 
 	l.visit(g, 0)
 
 	for !l.pq.IsEmpty() {
-		e := l.pq.DelMin().(*Edge)
-		v := e.AnyVertex()
+		e := l.pq.DelMin().(*weighted.Edge)
+		v := e.From()
 		w := e.OtherVertex(v)
 		if l.marked[v] && l.marked[w] {
 			continue
@@ -39,7 +40,7 @@ func NewLazyPrimMst(g EdgeWeightedGraph) LazyPrimMst {
 	return l
 }
 
-func (l *LazyPrimMst) visit(g EdgeWeightedGraph, v int) {
+func (l *LazyPrimMst) visit(g weighted.EdgeWeightedGraph, v int) {
 	l.marked[v] = true
 
 	for _, e := range g.AdjacentTo(v) {
@@ -50,10 +51,10 @@ func (l *LazyPrimMst) visit(g EdgeWeightedGraph, v int) {
 
 }
 
-func (l *LazyPrimMst) Edges() []Edge {
-	edges := make([]Edge, l.mst.Len())
+func (l *LazyPrimMst) Edges() []weighted.Edge {
+	edges := make([]weighted.Edge, l.mst.Len())
 	for i, e := range l.mst {
-		edges[i] = *e.(*Edge)
+		edges[i] = *e.(*weighted.Edge)
 	}
 
 	return edges
@@ -62,7 +63,7 @@ func (l *LazyPrimMst) Edges() []Edge {
 func (l *LazyPrimMst) Weight() float32 {
 	var weight float32 = 0.0
 	for _, edge := range l.Edges() {
-		weight += edge.weight
+		weight += edge.Weight()
 	}
 
 	return weight

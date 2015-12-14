@@ -1,26 +1,27 @@
-package weighted
+package minimumSpanningTree
 
 import (
 	"fmt"
 	"github.com/paullius/go-graphs-/collections"
+	"github.com/paullius/go-graphs-/weighted"
 	"math"
 )
 
 type PrimMst struct {
 	marked []bool
-	edgeTo []Edge
+	edgeTo []weighted.Edge
 	distTo []float32
 	pq     collections.IndexMinPriorityQueue
 }
 
-func NewPrimMst(g EdgeWeightedGraph) PrimMst {
+func NewPrimMst(g weighted.EdgeWeightedGraph) PrimMst {
 	l := PrimMst{
-		marked: make([]bool, g.v),
-		edgeTo: make([]Edge, g.v),
-		distTo: make([]float32, g.v),
+		marked: make([]bool, g.V()),
+		edgeTo: make([]weighted.Edge, g.V()),
+		distTo: make([]float32, g.V()),
 		pq:     collections.IndexMinPriorityQueue{}}
 
-	for v := 0; v < g.v; v++ {
+	for v := 0; v < g.V(); v++ {
 		l.distTo[v] = math.MaxFloat32
 	}
 	l.distTo[0] = 0.0
@@ -33,7 +34,7 @@ func NewPrimMst(g EdgeWeightedGraph) PrimMst {
 	return l
 }
 
-func (l *PrimMst) visit(g EdgeWeightedGraph, v int) {
+func (l *PrimMst) visit(g weighted.EdgeWeightedGraph, v int) {
 	l.marked[v] = true
 
 	for _, e := range g.AdjacentTo(v) {
@@ -54,7 +55,7 @@ func (l *PrimMst) visit(g EdgeWeightedGraph, v int) {
 
 }
 
-func (l *PrimMst) Edges() []Edge {
+func (l *PrimMst) Edges() []weighted.Edge {
 
 	return l.edgeTo
 }
@@ -62,7 +63,7 @@ func (l *PrimMst) Edges() []Edge {
 func (l *PrimMst) Weight() float32 {
 	var weight float32 = 0.0
 	for _, edge := range l.Edges() {
-		weight += edge.weight
+		weight += edge.Weight()
 	}
 
 	return weight
