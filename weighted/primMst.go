@@ -69,7 +69,7 @@ func (l *PrimMst) Weight() float32 {
 }
 
 func (l *PrimMst) PrintMinimumSpanningTree() {
-	fmt.Println("Prim’s MST:")
+	fmt.Println("Prim’s Minimum Spanning Tree:")
 	for _, e := range l.Edges() {
 		fmt.Printf("%v", e)
 		fmt.Println()

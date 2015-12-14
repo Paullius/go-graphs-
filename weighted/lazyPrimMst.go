@@ -8,19 +8,19 @@ import (
 type LazyPrimMst struct {
 	marked []bool
 	mst    collections.Queue // MST edges
-	pq     PriorityQueue
+	pq     collections.PriorityQueue
 }
 
 func NewLazyPrimMst(g EdgeWeightedGraph) LazyPrimMst {
 	l := LazyPrimMst{
 		marked: make([]bool, g.v),
 		mst:    collections.Queue{},
-		pq:     PriorityQueue{}}
+		pq:     collections.PriorityQueue{}}
 
 	l.visit(g, 0)
 
 	for !l.pq.IsEmpty() {
-		e := l.pq.DelMin()
+		e := l.pq.DelMin().(*Edge)
 		v := e.AnyVertex()
 		w := e.OtherVertex(v)
 		if l.marked[v] && l.marked[w] {

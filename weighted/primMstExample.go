@@ -1,10 +1,15 @@
 package weighted
 
+import (
+	"fmt"
+)
+
 func PrimMstExample() {
 
 	g := createEdgeWeightedGraph()
 	sp := NewPrimMst(g)
 	sp.PrintMinimumSpanningTree()
+	fmt.Println()
 }
 
 func createEdgeWeightedGraph() EdgeWeightedGraph {

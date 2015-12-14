@@ -1,11 +1,16 @@
 package shortest
 
+import (
+	"fmt"
+)
+
 func DijkstrasExample(from int, to []int) {
 
 	g := createShortestPathGraph()
 	sp := NewDijkstraShortestPaths(g, from)
 
 	sp.PrintShortestPath(to)
+	fmt.Println()
 }
 
 func createShortestPathGraph() EdgeWeightedDigraph {
