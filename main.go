@@ -12,6 +12,7 @@ func main() {
 
 	undirected.DepthFirstExample(0)
 	undirected.ConnectedComponentsExample()
+	undirected.DepthFirstPathsExample(0)
 
 	var g = undirected.NewGraph(5)
 	g.AddEdge(1, 2)

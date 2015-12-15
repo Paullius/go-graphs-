@@ -1,6 +1,7 @@
 package undirected
 
 import (
+	"fmt"
 	"github.com/paullius/go-graphs-/collections"
 )
 
@@ -66,4 +67,24 @@ func (dfp *DepthFirstPaths) search(v int) {
 			dfp.search(w)
 		}
 	}
+}
+
+func (d *DepthFirstPaths) Print(s int) {
+	fmt.Println("Depth-first Paths from ", s)
+
+	for v := 0; v < d.g.v; v++ {
+
+		fmt.Printf("%v to %v:", s, v)
+		if d.HasPathTo(v) {
+			for _, x := range d.PathTo(v) {
+				if x == s {
+					fmt.Printf("%v ", x)
+				} else {
+					fmt.Printf("-%v ", x)
+				}
+			}
+		}
+		fmt.Println()
+	}
+	fmt.Println()
 }
