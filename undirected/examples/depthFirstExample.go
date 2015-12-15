@@ -2,6 +2,7 @@ package undirected
 
 import (
 	"fmt"
+	"github.com/paullius/go-graphs-/undirected"
 )
 
 func DepthFirstExample(from int) {
@@ -13,8 +14,8 @@ func DepthFirstExample(from int) {
 	fmt.Println()
 }
 
-func createDepthFirstGraph() Graph {
-	g := NewGraph(13)
+func createDepthFirstGraph() undirected.Graph {
+	g := undirected.NewGraph(13)
 	g.AddEdge(0, 5)
 	g.AddEdge(4, 3)
 	g.AddEdge(0, 1)

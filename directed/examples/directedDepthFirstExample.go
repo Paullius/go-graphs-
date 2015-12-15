@@ -2,6 +2,7 @@ package directed
 
 import (
 	"fmt"
+	"github.com/paullius/go-graphs-/directed"
 )
 
 func DirectedDepthFirstExample(from int) {
@@ -13,8 +14,8 @@ func DirectedDepthFirstExample(from int) {
 	fmt.Println()
 }
 
-func createDirectedDepthFirstGraph() Digraph {
-	g := NewDigraph(13)
+func createDirectedDepthFirstGraph() directed.Digraph {
+	g := directed.NewDigraph(13)
 	g.AddEdge(4, 2)
 	g.AddEdge(2, 3)
 	g.AddEdge(3, 2)

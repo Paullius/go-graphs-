@@ -2,19 +2,20 @@ package undirected
 
 import (
 	"fmt"
+	"github.com/paullius/go-graphs-/undirected"
 )
 
-func ConnectedComponentsExample() {
+func DepthFirstPathsExample(from int) {
 
-	g := createConnectedComponentsGraph()
-	cc := g.ConnectedComponents()
+	g := createDepthFirstPathsGraph()
+	dfp := g.DepthFirstPaths(from)
 
-	cc.Print()
+	dfp.Print(from)
 	fmt.Println()
 }
 
-func createConnectedComponentsGraph() Graph {
-	g := NewGraph(13)
+func createDepthFirstPathsGraph() undirected.Graph {
+	g := undirected.NewGraph(13)
 	g.AddEdge(0, 6)
 	g.AddEdge(0, 2)
 	g.AddEdge(0, 1)

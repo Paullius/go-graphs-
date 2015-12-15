@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/paullius/go-graphs-/directed"
-	"github.com/paullius/go-graphs-/undirected"
+	"github.com/paullius/go-graphs-/directed/examples"
+	"github.com/paullius/go-graphs-/undirected/examples"
 	"github.com/paullius/go-graphs-/weighted/minimumSpanningTree"
 	"github.com/paullius/go-graphs-/weighted/shortestPaths"
 )
