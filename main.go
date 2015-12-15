@@ -22,4 +22,4 @@ func main() {
 }
 
 //go install github.com/paullius/go-graphs-
-//go test github.com/paullius/go-graphs-\undirected
+//go test github.com/paullius/go-graphs-\nonWeighted

@@ -3,20 +3,21 @@ package undirected
 import (
 	"fmt"
 	"github.com/paullius/go-graphs-/collections"
+	"github.com/paullius/go-graphs-/nonWeighted"
 )
 
 type BreadthFirstPaths struct {
-	g      *Graph
+	g      nonWeighted.NonWeightedGraph
 	marked []bool
 	edgeTo []int
 	s      int
 }
 
-func (g *Graph) BreadthFirstPaths(s int) BreadthFirstPaths {
+func NewBreadthFirstPaths(g nonWeighted.NonWeightedGraph, s int) BreadthFirstPaths {
 	bfp := BreadthFirstPaths{
 		g,
-		make([]bool, g.v),
-		make([]int, g.v),
+		make([]bool, g.Vertices()),
+		make([]int, g.Vertices()),
 		s,
 	}
 
@@ -49,7 +50,7 @@ func (bfp *BreadthFirstPaths) search(s int) {
 
 	for queue.Len() > 0 {
 		v := queue.Pop().(int)
-		for _, w := range bfp.g.adj[v] {
+		for _, w := range bfp.g.AdjacentTo(v) {
 			if !bfp.marked[w] {
 				bfp.edgeTo[w] = v
 				bfp.marked[w] = true
@@ -62,7 +63,7 @@ func (bfp *BreadthFirstPaths) search(s int) {
 func (bfp *BreadthFirstPaths) Print(s int) {
 	fmt.Println("Breadth-first Paths from ", s)
 
-	for v := 0; v < bfp.g.v; v++ {
+	for v := 0; v < bfp.g.Vertices(); v++ {
 
 		fmt.Printf("%v to %v:", s, v)
 		if bfp.HasPathTo(v) {

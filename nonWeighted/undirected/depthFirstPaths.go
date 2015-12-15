@@ -3,21 +3,22 @@ package undirected
 import (
 	"fmt"
 	"github.com/paullius/go-graphs-/collections"
+	"github.com/paullius/go-graphs-/nonWeighted"
 )
 
 type DepthFirstPaths struct {
-	g      *Graph
+	g      nonWeighted.NonWeightedGraph
 	marked []bool
 	edgeTo []int
 	s      int // source
 	count  int
 }
 
-func (g *Graph) DepthFirstPaths(s int) DepthFirstPaths {
+func NewDepthFirstPaths(g nonWeighted.NonWeightedGraph, s int) DepthFirstPaths {
 	dfp := DepthFirstPaths{
 		g,
-		make([]bool, g.v),
-		make([]int, g.v),
+		make([]bool, g.Vertices()),
+		make([]int, g.Vertices()),
 		s,
 		0,
 	}
@@ -61,7 +62,7 @@ func (dfp *DepthFirstPaths) PathTo(v int) []int {
 func (dfp *DepthFirstPaths) search(v int) {
 	dfp.marked[v] = true
 	dfp.count++
-	for _, w := range dfp.g.adj[v] {
+	for _, w := range dfp.g.AdjacentTo(v) {
 		if !dfp.marked[w] {
 			dfp.edgeTo[w] = v
 			dfp.search(w)
@@ -72,7 +73,7 @@ func (dfp *DepthFirstPaths) search(v int) {
 func (d *DepthFirstPaths) Print(s int) {
 	fmt.Println("Depth-first Paths from ", s)
 
-	for v := 0; v < d.g.v; v++ {
+	for v := 0; v < d.g.Vertices(); v++ {
 
 		fmt.Printf("%v to %v:", s, v)
 		if d.HasPathTo(v) {

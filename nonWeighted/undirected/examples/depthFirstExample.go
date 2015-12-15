@@ -2,33 +2,34 @@ package undirected
 
 import (
 	"fmt"
+	"github.com/paullius/go-graphs-/nonWeighted"
 	"github.com/paullius/go-graphs-/nonWeighted/undirected"
 )
 
 func DepthFirstExample(from int) {
 
 	g := createDepthFirstGraph()
-	df := g.DepthFirst(from)
+	df := undirected.NewDepthFirst(g, from)
 
 	df.Print(from)
 	fmt.Println()
 }
 
-func createDepthFirstGraph() undirected.Graph {
-	g := undirected.NewGraph(13)
-	g.AddEdge(0, 5)
-	g.AddEdge(4, 3)
-	g.AddEdge(0, 1)
-	g.AddEdge(9, 12)
-	g.AddEdge(6, 4)
-	g.AddEdge(5, 4)
-	g.AddEdge(0, 2)
-	g.AddEdge(11, 12)
-	g.AddEdge(9, 10)
-	g.AddEdge(0, 6)
-	g.AddEdge(7, 8)
-	g.AddEdge(9, 11)
-	g.AddEdge(5, 3)
+func createDepthFirstGraph() nonWeighted.NonWeightedGraph {
+	g := nonWeighted.NewNonWeightedGraph(13)
+	g.AddUndirectedEdge(0, 5)
+	g.AddUndirectedEdge(4, 3)
+	g.AddUndirectedEdge(0, 1)
+	g.AddUndirectedEdge(9, 12)
+	g.AddUndirectedEdge(6, 4)
+	g.AddUndirectedEdge(5, 4)
+	g.AddUndirectedEdge(0, 2)
+	g.AddUndirectedEdge(11, 12)
+	g.AddUndirectedEdge(9, 10)
+	g.AddUndirectedEdge(0, 6)
+	g.AddUndirectedEdge(7, 8)
+	g.AddUndirectedEdge(9, 11)
+	g.AddUndirectedEdge(5, 3)
 
 	return g
 }

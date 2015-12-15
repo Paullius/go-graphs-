@@ -2,18 +2,19 @@ package directed
 
 import (
 	"fmt"
+	"github.com/paullius/go-graphs-/nonWeighted"
 )
 
 type DirectedDepthFirst struct {
-	g      *Digraph
+	g      nonWeighted.NonWeightedGraph
 	marked []bool
 	count  int
 }
 
-func (g *Digraph) DirecteDepthFirst(s int) DirectedDepthFirst {
+func NewDirecteDepthFirst(g nonWeighted.NonWeightedGraph, s int) DirectedDepthFirst {
 	df := DirectedDepthFirst{
 		g,
-		make([]bool, g.v),
+		make([]bool, g.Vertices()),
 		0,
 	}
 	df.search(s)
@@ -23,7 +24,7 @@ func (g *Digraph) DirecteDepthFirst(s int) DirectedDepthFirst {
 func (df *DirectedDepthFirst) search(v int) {
 	df.marked[v] = true
 	df.count++
-	for _, w := range df.g.adj[v] {
+	for _, w := range df.g.AdjacentTo(v) {
 		if !df.marked[w] {
 			df.search(w)
 		}
@@ -33,7 +34,7 @@ func (df *DirectedDepthFirst) search(v int) {
 func (df *DirectedDepthFirst) Print(s int) {
 	fmt.Println("Directed Depth-first Paths from ", s)
 
-	for v := 0; v < df.g.v; v++ {
+	for v := 0; v < df.g.Vertices(); v++ {
 		if df.marked[v] {
 			fmt.Printf("%v ", v)
 		}

@@ -2,6 +2,7 @@ package directed
 
 import (
 	"github.com/paullius/go-graphs-/collections"
+	"github.com/paullius/go-graphs-/nonWeighted"
 )
 
 type DirectedDepthFirstWithCycleDetection struct {
@@ -11,11 +12,11 @@ type DirectedDepthFirstWithCycleDetection struct {
 	directedDepthFirst DirectedDepthFirst
 }
 
-func (g *Digraph) DirectedDepthFirstWithCycleDetection(s int) DirectedDepthFirst {
+func NewDirectedDepthFirstWithCycleDetection(g nonWeighted.NonWeightedGraph, s int) DirectedDepthFirst {
 
 	cd := DirectedDepthFirstWithCycleDetection{directedDepthFirst: DirectedDepthFirst{
 		g,
-		make([]bool, g.v),
+		make([]bool, g.Vertices()),
 		0,
 	}}
 
@@ -27,7 +28,7 @@ func (df *DirectedDepthFirstWithCycleDetection) search(v int) {
 	df.onStack[v] = true
 	df.directedDepthFirst.marked[v] = true
 	df.directedDepthFirst.count++
-	for _, w := range df.directedDepthFirst.g.adj[v] {
+	for _, w := range df.directedDepthFirst.g.AdjacentTo(v) {
 		if df.hasCycle() {
 			return
 		}

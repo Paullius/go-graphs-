@@ -2,20 +2,21 @@ package undirected
 
 import (
 	"fmt"
+	"github.com/paullius/go-graphs-/nonWeighted"
 )
 
 type DepthFirst struct {
-	g      *Graph
+	g      nonWeighted.NonWeightedGraph
 	marked []bool
 	count  int
 }
 
 // Do depth first graph search
 // s - source vertex
-func (g *Graph) DepthFirst(s int) DepthFirst {
+func NewDepthFirst(g nonWeighted.NonWeightedGraph, s int) DepthFirst {
 	df := DepthFirst{
 		g,
-		make([]bool, g.v),
+		make([]bool, g.Vertices()),
 		0,
 	}
 	df.search(s)
@@ -35,7 +36,7 @@ func (df *DepthFirst) IsConnected(v int) bool {
 func (df *DepthFirst) search(v int) {
 	df.marked[v] = true
 	df.count++
-	for _, w := range df.g.adj[v] {
+	for _, w := range df.g.AdjacentTo(v) {
 		if !df.marked[w] {
 			df.search(w)
 		}
@@ -45,7 +46,7 @@ func (df *DepthFirst) search(v int) {
 func (d *DepthFirst) Print(s int) {
 	fmt.Println("Depth-first from ", s)
 
-	for v := 0; v < d.g.v; v++ {
+	for v := 0; v < d.g.Vertices(); v++ {
 		if d.marked[v] {
 			fmt.Printf("%v ", v)
 		}
@@ -53,7 +54,7 @@ func (d *DepthFirst) Print(s int) {
 	}
 	fmt.Println()
 
-	if d.count != d.g.v {
+	if d.count != d.g.Vertices() {
 		fmt.Printf("NOT ")
 	}
 	fmt.Println("connected")

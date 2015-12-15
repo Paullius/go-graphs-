@@ -1,7 +1,7 @@
-package undirected_test
+package nonWeighted_test
 
 import (
-	"github.com/paullius/go-graphs-/undirected"
+	"github.com/paullius/go-graphs-/nonWeighted"
 	"testing"
 )
 
@@ -14,7 +14,7 @@ func TestNewGraphVertices(t *testing.T) {
 		{0, 0},
 	}
 	for _, c := range cases {
-		graph := undirected.NewGraph(c.in)
+		graph := nonWeighted.NewNonWeightedGraph(c.in)
 		got := graph.Vertices()
 		if got != c.want {
 			t.Errorf("NewGraph(%v) == %v, want %v", c.in, got, c.want)
@@ -29,14 +29,14 @@ func TestNewGraphEdges(t *testing.T) {
 	}
 }
 
-func createTestGraph() undirected.Graph {
-	g := undirected.NewGraph(7)
-	g.AddEdge(0, 2)
-	g.AddEdge(0, 3)
-	g.AddEdge(1, 3)
-	g.AddEdge(1, 4)
-	g.AddEdge(1, 5)
-	g.AddEdge(2, 6)
-	g.AddEdge(4, 6)
+func createTestGraph() nonWeighted.NonWeightedGraph {
+	g := nonWeighted.NewNonWeightedGraph(7)
+	g.AddUndirectedEdge(0, 2)
+	g.AddUndirectedEdge(0, 3)
+	g.AddUndirectedEdge(1, 3)
+	g.AddUndirectedEdge(1, 4)
+	g.AddUndirectedEdge(1, 5)
+	g.AddUndirectedEdge(2, 6)
+	g.AddUndirectedEdge(4, 6)
 	return g
 }
