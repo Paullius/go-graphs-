@@ -14,15 +14,15 @@ type DijkstraShortestPaths struct {
 	from   int
 }
 
-func NewDijkstraShortestPaths(g EdgeWeightedDigraph, from int) DijkstraShortestPaths {
+func NewDijkstraShortestPaths(g weighted.EdgeWeightedGraph, from int) DijkstraShortestPaths {
 
 	l := DijkstraShortestPaths{
-		edgeTo: make([]weighted.Edge, g.v),
-		distTo: make([]float32, g.v),
+		edgeTo: make([]weighted.Edge, g.Vertices()),
+		distTo: make([]float32, g.Vertices()),
 		pq:     collections.IndexMinPriorityQueue{},
 		from:   from}
 
-	for v := 0; v < g.v; v++ {
+	for v := 0; v < g.Vertices(); v++ {
 		l.distTo[v] = math.MaxFloat32
 	}
 	l.distTo[from] = 0.0
@@ -36,7 +36,7 @@ func NewDijkstraShortestPaths(g EdgeWeightedDigraph, from int) DijkstraShortestP
 	return l
 }
 
-func (sp *DijkstraShortestPaths) relax(g EdgeWeightedDigraph, v int) {
+func (sp *DijkstraShortestPaths) relax(g weighted.EdgeWeightedGraph, v int) {
 	for _, e := range g.AdjacentTo(v) {
 		var w = e.To()
 		if sp.distTo[w] > sp.distTo[v]+e.Weight() {

@@ -16,12 +16,12 @@ type PrimMst struct {
 
 func NewPrimMst(g weighted.EdgeWeightedGraph) PrimMst {
 	l := PrimMst{
-		marked: make([]bool, g.V()),
-		edgeTo: make([]weighted.Edge, g.V()),
-		distTo: make([]float32, g.V()),
+		marked: make([]bool, g.Vertices()),
+		edgeTo: make([]weighted.Edge, g.Vertices()),
+		distTo: make([]float32, g.Vertices()),
 		pq:     collections.IndexMinPriorityQueue{}}
 
-	for v := 0; v < g.V(); v++ {
+	for v := 0; v < g.Vertices(); v++ {
 		l.distTo[v] = math.MaxFloat32
 	}
 	l.distTo[0] = 0.0

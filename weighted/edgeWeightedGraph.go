@@ -14,16 +14,22 @@ func NewEdgeWeightedGraph(v int) EdgeWeightedGraph {
 	return g
 }
 
-func (g *EdgeWeightedGraph) V() int {
+func (g *EdgeWeightedGraph) Vertices() int {
 	return g.v
 }
 
-func (g *EdgeWeightedGraph) AddEdge(e Edge) {
+func (g *EdgeWeightedGraph) AddUndirectedEdge(e Edge) {
 	v := e.From()
 	w := e.OtherVertex(v)
 
 	g.adj[v] = append(g.adj[v], e)
 	g.adj[w] = append(g.adj[w], e)
+	g.e++
+}
+
+func (g *EdgeWeightedGraph) AddDirectedEdge(e Edge) {
+	g.adj[e.From()] = append(g.adj[e.From()], e)
+
 	g.e++
 }
 

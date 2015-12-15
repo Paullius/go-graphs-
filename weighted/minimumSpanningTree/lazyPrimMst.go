@@ -14,7 +14,7 @@ type LazyPrimMst struct {
 
 func NewLazyPrimMst(g weighted.EdgeWeightedGraph) LazyPrimMst {
 	l := LazyPrimMst{
-		marked: make([]bool, g.V()),
+		marked: make([]bool, g.Vertices()),
 		mst:    collections.Queue{},
 		pq:     collections.PriorityQueue{}}
 
