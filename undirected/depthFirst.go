@@ -1,5 +1,9 @@
 package undirected
 
+import (
+	"fmt"
+)
+
 type DepthFirst struct {
 	g      *Graph
 	marked []bool
@@ -36,4 +40,21 @@ func (df *DepthFirst) search(v int) {
 			df.search(w)
 		}
 	}
+}
+
+func (d *DepthFirst) Print(s int) {
+	fmt.Println("Depth-first from ", s)
+
+	for v := 0; v < d.g.v; v++ {
+		if d.marked[v] {
+			fmt.Printf("%v ", v)
+		}
+
+	}
+	fmt.Println()
+
+	if d.count != d.g.v {
+		fmt.Printf("NOT ")
+	}
+	fmt.Println("connected")
 }

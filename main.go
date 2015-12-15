@@ -10,6 +10,7 @@ import (
 
 func main() {
 
+	undirected.DepthFirstExample(0)
 	undirected.ConnectedComponentsExample()
 
 	var g = undirected.NewGraph(5)
