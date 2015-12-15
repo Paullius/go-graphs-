@@ -3,19 +3,20 @@ package shortestPaths
 import (
 	"fmt"
 	"github.com/paullius/go-graphs-/weighted"
+	"github.com/paullius/go-graphs-/weighted/shortestPaths"
 )
 
 func DijkstrasExample(from int, to []int) {
 
 	g := createShortestPathGraph()
-	sp := NewDijkstraShortestPaths(g, from)
+	sp := shortestPaths.NewDijkstraShortestPaths(g, from)
 
 	sp.PrintShortestPath(to)
 	fmt.Println()
 }
 
-func createShortestPathGraph() EdgeWeightedDigraph {
-	g := NewEdgeWeightedDigraph(8)
+func createShortestPathGraph() shortestPaths.EdgeWeightedDigraph {
+	g := shortestPaths.NewEdgeWeightedDigraph(8)
 	g.AddEdge(weighted.NewEdge(4, 5, 0.35))
 	g.AddEdge(weighted.NewEdge(5, 4, 0.35))
 	g.AddEdge(weighted.NewEdge(4, 7, 0.37))

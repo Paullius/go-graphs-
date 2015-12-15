@@ -1,19 +1,18 @@
 package minimumSpanningTree
 
 import (
-	"fmt"
 	"github.com/paullius/go-graphs-/weighted"
+	"github.com/paullius/go-graphs-/weighted/minimumSpanningTree"
 )
 
-func PrimMstExample() {
+func LazyPrimMstExample() {
 
-	g := createEdgeWeightedGraph()
-	sp := NewPrimMst(g)
+	g := createLazyEdgeWeightedGraph()
+	sp := minimumSpanningTree.NewLazyPrimMst(g)
 	sp.PrintMinimumSpanningTree()
-	fmt.Println()
 }
 
-func createEdgeWeightedGraph() weighted.EdgeWeightedGraph {
+func createLazyEdgeWeightedGraph() weighted.EdgeWeightedGraph {
 	g := weighted.NewEdgeWeightedGraph(8)
 	g.AddEdge(weighted.NewEdge(4, 5, 0.35))
 	g.AddEdge(weighted.NewEdge(4, 7, 0.37))

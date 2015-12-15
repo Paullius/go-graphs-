@@ -2,7 +2,7 @@ package undirected
 
 import (
 	"fmt"
-	"github.com/paullius/go-graphs-/undirected"
+	"github.com/paullius/go-graphs-/nonWeighted/undirected"
 )
 
 func BreadthFirstPathsExample(from int) {

@@ -2,7 +2,7 @@ package directed
 
 import (
 	"fmt"
-	"github.com/paullius/go-graphs-/directed"
+	"github.com/paullius/go-graphs-/nonWeighted/directed"
 )
 
 func DirectedDepthFirstExample(from int) {
