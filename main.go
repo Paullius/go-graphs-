@@ -9,6 +9,9 @@ import (
 )
 
 func main() {
+
+	undirected.ConnectedComponentsExample()
+
 	var g = undirected.NewGraph(5)
 	g.AddEdge(1, 2)
 	g.AddEdge(1, 3)
