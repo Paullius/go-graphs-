@@ -14,15 +14,11 @@ func main() {
 	undirected.DepthFirstPathsExample(0)
 	undirected.BreadthFirstPathsExample(0)
 
-	var dg = directed.NewDigraph(5)
-	dg.AddEdge(1, 2)
-	dg.AddEdge(1, 3)
-	dg.AddEdge(2, 3)
+	directed.DirectedDepthFirstExample(2)
 
 	minimumSpanningTree.PrimMstExample()
 
 	shortestPaths.DijkstrasExample(0, []int{1, 2, 3, 4, 5, 6, 7})
-
 }
 
 //go install github.com/paullius/go-graphs-
