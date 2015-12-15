@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/paullius/go-graphs-/directed"
 	"github.com/paullius/go-graphs-/undirected"
 	"github.com/paullius/go-graphs-/weighted/minimumSpanningTree"
@@ -13,24 +12,7 @@ func main() {
 	undirected.DepthFirstExample(0)
 	undirected.ConnectedComponentsExample()
 	undirected.DepthFirstPathsExample(0)
-
-	var g = undirected.NewGraph(5)
-	g.AddEdge(1, 2)
-	g.AddEdge(1, 3)
-	g.AddEdge(2, 3)
-
-	fmt.Printf("Count of self loops: %d\n", g.NumberOfSelfLoops())
-
-	var dfs = g.DepthFirst(2)
-	var dfp = g.DepthFirstPaths(2)
-	var bfp = g.BreadthFirstPaths(1)
-
-	fmt.Printf("Count of vertices: %d\n", g.Vertices())
-	fmt.Printf("Count of vertices connected to s: %d\n", dfs.ConnectedCount())
-	fmt.Println(dfp.HasPathTo(1))
-	fmt.Println(bfp.HasPathTo(1))
-	fmt.Println(bfp.HasPathTo(2))
-	fmt.Println(bfp.HasPathTo(4))
+	undirected.BreadthFirstPathsExample(0)
 
 	var dg = directed.NewDigraph(5)
 	dg.AddEdge(1, 2)

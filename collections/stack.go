@@ -15,3 +15,11 @@ func (q *Stack) Pop() (n interface{}) {
 func (q *Stack) Len() int {
 	return len(*q)
 }
+
+func (st *Stack) ConvertToInt() []int {
+	b := make([]int, len(*st))
+	for i, s := range *st {
+		b[i] = s.(int)
+	}
+	return b
+}
