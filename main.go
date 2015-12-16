@@ -19,7 +19,9 @@ func main() {
 	minimumSpanningTree.PrimMstExample()
 
 	shortestPaths.DijkstrasExample(0, []int{1, 2, 3, 4, 5, 6, 7})
+
 }
 
+//go run %GOPATH%\src\github.com\Paullius\go-graphs-\main.go
 //go install github.com/paullius/go-graphs-
 //go test github.com/paullius/go-graphs-\nonWeighted
