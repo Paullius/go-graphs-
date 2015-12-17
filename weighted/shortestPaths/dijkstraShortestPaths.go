@@ -10,7 +10,7 @@ import (
 type DijkstraShortestPaths struct {
 	edgeTo []weighted.Edge
 	distTo []float32
-	pq     collections.IndexMinPriorityQueue
+	pq     collections.PriorityQueue
 	from   int
 }
 
@@ -19,7 +19,7 @@ func NewDijkstraShortestPaths(g weighted.EdgeWeightedGraph, from int) DijkstraSh
 	l := DijkstraShortestPaths{
 		edgeTo: make([]weighted.Edge, g.Vertices()),
 		distTo: make([]float32, g.Vertices()),
-		pq:     collections.IndexMinPriorityQueue{},
+		pq:     collections.PriorityQueue{},
 		from:   from}
 
 	for v := 0; v < g.Vertices(); v++ {
@@ -27,10 +27,11 @@ func NewDijkstraShortestPaths(g weighted.EdgeWeightedGraph, from int) DijkstraSh
 	}
 	l.distTo[from] = 0.0
 
-	l.pq.Insert(from, 0.0)
+	l.pq.Insert(weighted.NewVertex(from, 0.0))
 
 	for l.pq.Len() > 0 {
-		l.relax(g, l.pq.DelMin())
+		indexItem := l.pq.DelMin().(collections.IndexItem)
+		l.relax(g, indexItem.Index())
 	}
 
 	return l
@@ -45,7 +46,7 @@ func (sp *DijkstraShortestPaths) relax(g weighted.EdgeWeightedGraph, v int) {
 			if sp.pq.Contains(w) {
 				sp.pq.Change(w, sp.distTo[w])
 			} else {
-				sp.pq.Insert(w, sp.distTo[w])
+				sp.pq.Insert(weighted.NewVertex(w, sp.distTo[w]))
 			}
 		}
 	}

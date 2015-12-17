@@ -11,7 +11,7 @@ type PrimMst struct {
 	marked []bool
 	edgeTo []weighted.Edge
 	distTo []float32
-	pq     collections.IndexMinPriorityQueue
+	pq     collections.PriorityQueue
 }
 
 func NewPrimMst(g weighted.EdgeWeightedGraph) PrimMst {
@@ -19,16 +19,17 @@ func NewPrimMst(g weighted.EdgeWeightedGraph) PrimMst {
 		marked: make([]bool, g.Vertices()),
 		edgeTo: make([]weighted.Edge, g.Vertices()),
 		distTo: make([]float32, g.Vertices()),
-		pq:     collections.IndexMinPriorityQueue{}}
+		pq:     collections.PriorityQueue{}}
 
 	for v := 0; v < g.Vertices(); v++ {
 		l.distTo[v] = math.MaxFloat32
 	}
 	l.distTo[0] = 0.0
-	l.pq.Insert(0, 0.0)
+	l.pq.Insert(weighted.NewVertex(0, 0.0))
 
 	for !l.pq.IsEmpty() {
-		l.visit(g, l.pq.DelMin())
+		indexItem := l.pq.DelMin().(collections.IndexItem)
+		l.visit(g, indexItem.Index())
 	}
 
 	return l
@@ -48,7 +49,7 @@ func (l *PrimMst) visit(g weighted.EdgeWeightedGraph, v int) {
 			if l.pq.Contains(w) {
 				l.pq.Change(w, l.distTo[w])
 			} else {
-				l.pq.Insert(w, l.distTo[w])
+				l.pq.Insert(weighted.NewVertex(w, l.distTo[w]))
 			}
 		}
 	}
