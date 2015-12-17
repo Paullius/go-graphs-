@@ -25,7 +25,8 @@ func NewPrimMst(g weighted.EdgeWeightedGraph) PrimMst {
 		l.distTo[v] = math.MaxFloat32
 	}
 	l.distTo[0] = 0.0
-	l.pq.Insert(weighted.NewVertex(0, 0.0))
+	vertex := weighted.NewVertex(0, 0.0)
+	l.pq.Insert(&vertex)
 
 	for !l.pq.IsEmpty() {
 		vertex := l.pq.DelMin().(collections.IndexItem)
@@ -49,15 +50,14 @@ func (l *PrimMst) visit(g weighted.EdgeWeightedGraph, v int) {
 			if l.pq.Contains(w) {
 				l.pq.Change(w, l.distTo[w])
 			} else {
-				l.pq.Insert(weighted.NewVertex(w, l.distTo[w]))
+				vertex := weighted.NewVertex(w, l.distTo[w])
+				l.pq.Insert(&vertex)
 			}
 		}
 	}
-
 }
 
 func (l *PrimMst) Edges() []weighted.Edge {
-
 	return l.edgeTo
 }
 

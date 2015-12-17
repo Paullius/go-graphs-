@@ -26,8 +26,8 @@ func NewDijkstraShortestPaths(g weighted.EdgeWeightedGraph, from int) DijkstraSh
 		l.distTo[v] = math.MaxFloat32
 	}
 	l.distTo[from] = 0.0
-
-	l.pq.Insert(weighted.NewVertex(from, 0.0))
+	vertex := weighted.NewVertex(from, 0.0)
+	l.pq.Insert(&vertex)
 
 	for l.pq.Len() > 0 {
 		indexItem := l.pq.DelMin().(collections.IndexItem)
@@ -46,7 +46,8 @@ func (sp *DijkstraShortestPaths) relax(g weighted.EdgeWeightedGraph, v int) {
 			if sp.pq.Contains(w) {
 				sp.pq.Change(w, sp.distTo[w])
 			} else {
-				sp.pq.Insert(weighted.NewVertex(w, sp.distTo[w]))
+				vertex := weighted.NewVertex(w, sp.distTo[w])
+				sp.pq.Insert(&vertex)
 			}
 		}
 	}
