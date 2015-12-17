@@ -28,8 +28,8 @@ func NewPrimMst(g weighted.EdgeWeightedGraph) PrimMst {
 	l.pq.Insert(weighted.NewVertex(0, 0.0))
 
 	for !l.pq.IsEmpty() {
-		indexItem := l.pq.DelMin().(collections.IndexItem)
-		l.visit(g, indexItem.Index())
+		vertex := l.pq.DelMin().(collections.IndexItem)
+		l.visit(g, vertex.Index())
 	}
 
 	return l
