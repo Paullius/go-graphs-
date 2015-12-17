@@ -25,6 +25,10 @@ func (e *Edge) Weight() float32 {
 	return e.weight
 }
 
+func (e *Edge) SetWeight(weight float32) {
+	e.weight = weight
+}
+
 func (e *Edge) From() int {
 	return e.v
 }

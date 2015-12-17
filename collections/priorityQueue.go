@@ -2,10 +2,11 @@ package collections
 
 type Item interface {
 	Weight() float32
+	SetWeight(weight float32)
 }
 type IndexItem interface {
+	Item
 	Index() int
-	SetWeight(weight float32)
 }
 
 type PriorityQueue []*Item
