@@ -7,20 +7,20 @@ import (
 )
 
 type DepthFirstPaths struct {
-	g      unweighted.NonWeightedGraph
+	g      unweighted.UnweightedGraph
 	marked []bool
 	edgeTo []int
 	s      int // source
 	count  int
 }
 
-func NewDepthFirstPaths(g unweighted.NonWeightedGraph, s int) DepthFirstPaths {
+func NewDepthFirstPaths(g unweighted.UnweightedGraph, s int) DepthFirstPaths {
 	dfp := DepthFirstPaths{
-		g,
-		make([]bool, g.Vertices()),
-		make([]int, g.Vertices()),
-		s,
-		0,
+		g:      g,
+		marked: make([]bool, g.Vertices()),
+		edgeTo: make([]int, g.Vertices()),
+		s:      s,
+		count:  0,
 	}
 	dfp.search(s)
 	return dfp

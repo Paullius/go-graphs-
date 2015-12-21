@@ -6,12 +6,12 @@ import (
 )
 
 type DirectedDepthFirst struct {
-	g      unweighted.NonWeightedGraph
+	g      unweighted.UnweightedGraph
 	marked []bool
 	count  int
 }
 
-func NewDirecteDepthFirst(g unweighted.NonWeightedGraph, s int) DirectedDepthFirst {
+func NewDirecteDepthFirst(g unweighted.UnweightedGraph, s int) DirectedDepthFirst {
 	df := DirectedDepthFirst{
 		g,
 		make([]bool, g.Vertices()),

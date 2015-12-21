@@ -6,14 +6,14 @@ import (
 )
 
 type DepthFirst struct {
-	g      unweighted.NonWeightedGraph
+	g      unweighted.UnweightedGraph
 	marked []bool
 	count  int
 }
 
 // Do depth first graph search
 // s - source vertex
-func NewDepthFirst(g unweighted.NonWeightedGraph, s int) DepthFirst {
+func NewDepthFirst(g unweighted.UnweightedGraph, s int) DepthFirst {
 	df := DepthFirst{
 		g,
 		make([]bool, g.Vertices()),

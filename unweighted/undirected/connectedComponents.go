@@ -6,13 +6,13 @@ import (
 )
 
 type ConnectedComponents struct {
-	g      unweighted.NonWeightedGraph
+	g      unweighted.UnweightedGraph
 	marked []bool
 	id     []int
 	count  int
 }
 
-func NewConnectedComponents(g unweighted.NonWeightedGraph) ConnectedComponents {
+func NewConnectedComponents(g unweighted.UnweightedGraph) ConnectedComponents {
 	cc := ConnectedComponents{g, make([]bool, g.Vertices()), make([]int, g.Vertices()), 0}
 
 	for s := 0; s < cc.g.Vertices(); s++ {

@@ -7,13 +7,13 @@ import (
 )
 
 type BreadthFirstPaths struct {
-	g      unweighted.NonWeightedGraph
+	g      unweighted.UnweightedGraph
 	marked []bool
 	edgeTo []int
 	s      int
 }
 
-func NewBreadthFirstPaths(g unweighted.NonWeightedGraph, s int) BreadthFirstPaths {
+func NewBreadthFirstPaths(g unweighted.UnweightedGraph, s int) BreadthFirstPaths {
 	bfp := BreadthFirstPaths{
 		g,
 		make([]bool, g.Vertices()),

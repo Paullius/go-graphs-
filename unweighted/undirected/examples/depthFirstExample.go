@@ -15,8 +15,8 @@ func DepthFirstExample(from int) {
 	fmt.Println()
 }
 
-func createDepthFirstGraph() unweighted.NonWeightedGraph {
-	g := unweighted.NewNonWeightedGraph(13)
+func createDepthFirstGraph() unweighted.UnweightedGraph {
+	g := unweighted.NewUnweightedGraph(13)
 	g.AddUndirectedEdge(0, 5)
 	g.AddUndirectedEdge(4, 3)
 	g.AddUndirectedEdge(0, 1)

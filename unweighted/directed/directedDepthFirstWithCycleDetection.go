@@ -12,7 +12,7 @@ type DirectedDepthFirstWithCycleDetection struct {
 	directedDepthFirst DirectedDepthFirst
 }
 
-func NewDirectedDepthFirstWithCycleDetection(g unweighted.NonWeightedGraph, s int) DirectedDepthFirst {
+func NewDirectedDepthFirstWithCycleDetection(g unweighted.UnweightedGraph, s int) DirectedDepthFirst {
 
 	cd := DirectedDepthFirstWithCycleDetection{directedDepthFirst: DirectedDepthFirst{
 		g,

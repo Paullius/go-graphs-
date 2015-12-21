@@ -57,4 +57,4 @@ func handleHello(w http.ResponseWriter, req *http.Request) {
 
 //go run %GOPATH%\src\github.com\Paullius\go-graphs-\main.go
 //go install github.com/paullius/go-graphs-
-//go test github.com/paullius/go-graphs-\nonWeighted
+//go test github.com/paullius/go-graphs-\unweighted

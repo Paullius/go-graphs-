@@ -15,8 +15,8 @@ func BreadthFirstPathsExample(from int) {
 	fmt.Println()
 }
 
-func createBreadthFirstPathsGraph() unweighted.NonWeightedGraph {
-	g := unweighted.NewNonWeightedGraph(13)
+func createBreadthFirstPathsGraph() unweighted.UnweightedGraph {
+	g := unweighted.NewUnweightedGraph(13)
 	g.AddUndirectedEdge(0, 6)
 	g.AddUndirectedEdge(0, 2)
 	g.AddUndirectedEdge(0, 1)

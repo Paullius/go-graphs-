@@ -15,8 +15,8 @@ func ConnectedComponentsExample() {
 	fmt.Println()
 }
 
-func createConnectedComponentsGraph() unweighted.NonWeightedGraph {
-	g := unweighted.NewNonWeightedGraph(13)
+func createConnectedComponentsGraph() unweighted.UnweightedGraph {
+	g := unweighted.NewUnweightedGraph(13)
 	g.AddUndirectedEdge(0, 6)
 	g.AddUndirectedEdge(0, 2)
 	g.AddUndirectedEdge(0, 1)
