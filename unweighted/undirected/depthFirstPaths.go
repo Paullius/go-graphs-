@@ -3,18 +3,18 @@ package undirected
 import (
 	"fmt"
 	"github.com/paullius/go-graphs-/collections"
-	"github.com/paullius/go-graphs-/nonWeighted"
+	"github.com/paullius/go-graphs-/unweighted"
 )
 
 type DepthFirstPaths struct {
-	g      nonWeighted.NonWeightedGraph
+	g      unweighted.NonWeightedGraph
 	marked []bool
 	edgeTo []int
 	s      int // source
 	count  int
 }
 
-func NewDepthFirstPaths(g nonWeighted.NonWeightedGraph, s int) DepthFirstPaths {
+func NewDepthFirstPaths(g unweighted.NonWeightedGraph, s int) DepthFirstPaths {
 	dfp := DepthFirstPaths{
 		g,
 		make([]bool, g.Vertices()),
@@ -50,14 +50,6 @@ func (dfp *DepthFirstPaths) PathTo(v int) []int {
 
 	return path.ConvertToInt()
 }
-
-// func convert(st collections.Stack) []int {
-// 	b := make([]int, len(st))
-// 	for i := range st {
-// 		b[i] = st[i].(int)
-// 	}
-// 	return b
-// }
 
 func (dfp *DepthFirstPaths) search(v int) {
 	dfp.marked[v] = true

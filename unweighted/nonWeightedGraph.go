@@ -1,7 +1,7 @@
-package nonWeighted
+package unweighted
 
 type NonWeightedGraph struct {
-	v, e int
+	v, e int // v - count of vertices. e - count of edges
 	adj  [][]int
 }
 

@@ -2,17 +2,17 @@ package undirected
 
 import (
 	"fmt"
-	"github.com/paullius/go-graphs-/nonWeighted"
+	"github.com/paullius/go-graphs-/unweighted"
 )
 
 type ConnectedComponents struct {
-	g      nonWeighted.NonWeightedGraph
+	g      unweighted.NonWeightedGraph
 	marked []bool
 	id     []int
 	count  int
 }
 
-func NewConnectedComponents(g nonWeighted.NonWeightedGraph) ConnectedComponents {
+func NewConnectedComponents(g unweighted.NonWeightedGraph) ConnectedComponents {
 	cc := ConnectedComponents{g, make([]bool, g.Vertices()), make([]int, g.Vertices()), 0}
 
 	for s := 0; s < cc.g.Vertices(); s++ {

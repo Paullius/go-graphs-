@@ -2,21 +2,21 @@ package undirected
 
 import (
 	"fmt"
-	"github.com/paullius/go-graphs-/nonWeighted"
-	"github.com/paullius/go-graphs-/nonWeighted/undirected"
+	"github.com/paullius/go-graphs-/unweighted"
+	"github.com/paullius/go-graphs-/unweighted/undirected"
 )
 
-func DepthFirstPathsExample(from int) {
+func ConnectedComponentsExample() {
 
-	g := createDepthFirstPathsGraph()
-	dfp := undirected.NewDepthFirstPaths(g, from)
+	g := createConnectedComponentsGraph()
+	cc := undirected.NewConnectedComponents(g)
 
-	dfp.Print(from)
+	cc.Print()
 	fmt.Println()
 }
 
-func createDepthFirstPathsGraph() nonWeighted.NonWeightedGraph {
-	g := nonWeighted.NewNonWeightedGraph(13)
+func createConnectedComponentsGraph() unweighted.NonWeightedGraph {
+	g := unweighted.NewNonWeightedGraph(13)
 	g.AddUndirectedEdge(0, 6)
 	g.AddUndirectedEdge(0, 2)
 	g.AddUndirectedEdge(0, 1)

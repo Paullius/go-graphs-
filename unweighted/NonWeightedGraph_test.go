@@ -1,4 +1,4 @@
-package nonWeighted_test
+package unweighted_test
 
 import (
 	"github.com/paullius/go-graphs-/nonWeighted"

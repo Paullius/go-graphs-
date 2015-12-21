@@ -2,7 +2,7 @@ package directed
 
 import (
 	"github.com/paullius/go-graphs-/collections"
-	"github.com/paullius/go-graphs-/nonWeighted"
+	"github.com/paullius/go-graphs-/unweighted"
 )
 
 type DirectedDepthFirstWithCycleDetection struct {
@@ -12,7 +12,7 @@ type DirectedDepthFirstWithCycleDetection struct {
 	directedDepthFirst DirectedDepthFirst
 }
 
-func NewDirectedDepthFirstWithCycleDetection(g nonWeighted.NonWeightedGraph, s int) DirectedDepthFirst {
+func NewDirectedDepthFirstWithCycleDetection(g unweighted.NonWeightedGraph, s int) DirectedDepthFirst {
 
 	cd := DirectedDepthFirstWithCycleDetection{directedDepthFirst: DirectedDepthFirst{
 		g,

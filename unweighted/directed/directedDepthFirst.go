@@ -2,16 +2,16 @@ package directed
 
 import (
 	"fmt"
-	"github.com/paullius/go-graphs-/nonWeighted"
+	"github.com/paullius/go-graphs-/unweighted"
 )
 
 type DirectedDepthFirst struct {
-	g      nonWeighted.NonWeightedGraph
+	g      unweighted.NonWeightedGraph
 	marked []bool
 	count  int
 }
 
-func NewDirecteDepthFirst(g nonWeighted.NonWeightedGraph, s int) DirectedDepthFirst {
+func NewDirecteDepthFirst(g unweighted.NonWeightedGraph, s int) DirectedDepthFirst {
 	df := DirectedDepthFirst{
 		g,
 		make([]bool, g.Vertices()),

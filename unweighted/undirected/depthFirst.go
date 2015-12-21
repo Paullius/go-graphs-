@@ -2,18 +2,18 @@ package undirected
 
 import (
 	"fmt"
-	"github.com/paullius/go-graphs-/nonWeighted"
+	"github.com/paullius/go-graphs-/unweighted"
 )
 
 type DepthFirst struct {
-	g      nonWeighted.NonWeightedGraph
+	g      unweighted.NonWeightedGraph
 	marked []bool
 	count  int
 }
 
 // Do depth first graph search
 // s - source vertex
-func NewDepthFirst(g nonWeighted.NonWeightedGraph, s int) DepthFirst {
+func NewDepthFirst(g unweighted.NonWeightedGraph, s int) DepthFirst {
 	df := DepthFirst{
 		g,
 		make([]bool, g.Vertices()),

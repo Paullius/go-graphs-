@@ -2,8 +2,8 @@ package directed
 
 import (
 	"fmt"
-	"github.com/paullius/go-graphs-/nonWeighted"
-	"github.com/paullius/go-graphs-/nonWeighted/directed"
+	"github.com/paullius/go-graphs-/unweighted"
+	"github.com/paullius/go-graphs-/unweighted/directed"
 )
 
 func DirectedDepthFirstExample(from int) {
@@ -15,8 +15,8 @@ func DirectedDepthFirstExample(from int) {
 	fmt.Println()
 }
 
-func createDirectedDepthFirstGraph() nonWeighted.NonWeightedGraph {
-	g := nonWeighted.NewNonWeightedGraph(13)
+func createDirectedDepthFirstGraph() unweighted.NonWeightedGraph {
+	g := unweighted.NewNonWeightedGraph(13)
 	g.AddDirectedEdge(4, 2)
 	g.AddDirectedEdge(2, 3)
 	g.AddDirectedEdge(3, 2)

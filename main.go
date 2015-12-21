@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/paullius/go-graphs-/nonWeighted/directed/examples"
-	"github.com/paullius/go-graphs-/nonWeighted/undirected/examples"
+	"github.com/paullius/go-graphs-/unweighted/directed/examples"
+	"github.com/paullius/go-graphs-/unweighted/undirected/examples"
 	"github.com/paullius/go-graphs-/weighted/minimumSpanningTree/examples"
 	"github.com/paullius/go-graphs-/weighted/shortestPaths/examples"
 	"log"
@@ -24,9 +24,9 @@ func main() {
 
 	shortestPaths.DijkstrasExample(0, []int{1, 2, 3, 4, 5, 6, 7})
 
-	asyncRun()
+	//asyncRun()
 
-	startWebServer()
+	//startWebServer()
 
 }
 
@@ -52,7 +52,7 @@ func startWebServer() {
 
 func handleHello(w http.ResponseWriter, req *http.Request) {
 	log.Println("serving", req.URL)
-	fmt.Fprintln(w, "<html>Hello, <b>User</b>:)<html>")
+	fmt.Fprintln(w, "<html>Hello, <b>User</b>:)<html")
 }
 
 //go run %GOPATH%\src\github.com\Paullius\go-graphs-\main.go

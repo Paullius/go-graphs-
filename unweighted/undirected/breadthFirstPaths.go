@@ -3,17 +3,17 @@ package undirected
 import (
 	"fmt"
 	"github.com/paullius/go-graphs-/collections"
-	"github.com/paullius/go-graphs-/nonWeighted"
+	"github.com/paullius/go-graphs-/unweighted"
 )
 
 type BreadthFirstPaths struct {
-	g      nonWeighted.NonWeightedGraph
+	g      unweighted.NonWeightedGraph
 	marked []bool
 	edgeTo []int
 	s      int
 }
 
-func NewBreadthFirstPaths(g nonWeighted.NonWeightedGraph, s int) BreadthFirstPaths {
+func NewBreadthFirstPaths(g unweighted.NonWeightedGraph, s int) BreadthFirstPaths {
 	bfp := BreadthFirstPaths{
 		g,
 		make([]bool, g.Vertices()),
