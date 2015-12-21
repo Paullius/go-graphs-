@@ -21,15 +21,15 @@ func NewPrimMst(g weighted.EdgeWeightedGraph) PrimMst {
 		distTo: make([]float32, g.Vertices()),
 		pq:     collections.PriorityQueue{}}
 
-	for v := 0; v < g.Vertices(); v++ {
+	for v := 0; v < g.Vertices(); v++ { //initialize all vertice distance weight to maximum
 		l.distTo[v] = math.MaxFloat32
 	}
 	l.distTo[0] = 0.0
 	vertex := weighted.NewVertex(0, 0.0)
-	l.pq.Insert(&vertex)
+	l.pq.Insert(&vertex) //create zero index vertex with zero weight
 
 	for !l.pq.IsEmpty() {
-		vertex := l.pq.DelMin().(collections.IndexItem)
+		vertex := l.pq.DelMin().(collections.IndexItem) // get lowest weight vertice from queue
 		l.visit(g, vertex.Index())
 	}
 
@@ -39,17 +39,18 @@ func NewPrimMst(g weighted.EdgeWeightedGraph) PrimMst {
 func (l *PrimMst) visit(g weighted.EdgeWeightedGraph, v int) {
 	l.marked[v] = true
 
+	//finds not visited lowest weight vertice
 	for _, e := range g.AdjacentTo(v) {
-		w := e.OtherVertex(v)
-		if l.marked[w] {
+		w := e.OtherVertex(v) //get vertex connected with the v vertex
+		if l.marked[w] {      //vertice was already visited
 			continue
 		}
 		if e.Weight() < l.distTo[w] {
 			l.edgeTo[w] = e
 			l.distTo[w] = e.Weight()
-			if l.pq.Contains(w) {
+			if l.pq.Contains(w) { //has lower weight than previous vertice
 				l.pq.Change(w, l.distTo[w])
-			} else {
+			} else { //there is no weight for the vertice
 				vertex := weighted.NewVertex(w, l.distTo[w])
 				l.pq.Insert(&vertex)
 			}

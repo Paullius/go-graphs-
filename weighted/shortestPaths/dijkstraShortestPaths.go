@@ -22,30 +22,31 @@ func NewDijkstraShortestPaths(g weighted.EdgeWeightedGraph, from int) DijkstraSh
 		pq:     collections.PriorityQueue{},
 		from:   from}
 
-	for v := 0; v < g.Vertices(); v++ {
+	for v := 0; v < g.Vertices(); v++ { //initialize all vertice distance weight to maximum
 		l.distTo[v] = math.MaxFloat32
 	}
 	l.distTo[from] = 0.0
 	vertex := weighted.NewVertex(from, 0.0)
-	l.pq.Insert(&vertex)
+	l.pq.Insert(&vertex) //create zero index vertex with zero weight
 
 	for l.pq.Len() > 0 {
-		indexItem := l.pq.DelMin().(collections.IndexItem)
-		l.relax(g, indexItem.Index())
+		indexItem := l.pq.DelMin().(collections.IndexItem) // get lowest weight vertice from queue
+		l.visit(g, indexItem.Index())
 	}
 
 	return l
 }
 
-func (sp *DijkstraShortestPaths) relax(g weighted.EdgeWeightedGraph, v int) {
+func (sp *DijkstraShortestPaths) visit(g weighted.EdgeWeightedGraph, v int) {
 	for _, e := range g.AdjacentTo(v) {
-		var w = e.To()
-		if sp.distTo[w] > sp.distTo[v]+e.Weight() {
-			sp.distTo[w] = sp.distTo[v] + e.Weight()
+		var w = e.To() // to because directed graph
+		totalWeighToVertex := sp.distTo[v] + e.Weight()
+		if sp.distTo[w] > totalWeighToVertex { //is new total weigh to the vertex is lower
+			sp.distTo[w] = totalWeighToVertex
 			sp.edgeTo[w] = e
-			if sp.pq.Contains(w) {
+			if sp.pq.Contains(w) { //has lower weight than previous vertice
 				sp.pq.Change(w, sp.distTo[w])
-			} else {
+			} else { //there is no weight for the vertice
 				vertex := weighted.NewVertex(w, sp.distTo[w])
 				sp.pq.Insert(&vertex)
 			}
