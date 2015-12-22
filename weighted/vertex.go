@@ -12,6 +12,7 @@ func (i *Vertex) Weight() float32 {
 func (i *Vertex) Index() int {
 	return i.index
 }
+
 func (i *Vertex) SetWeight(weight float32) {
 	i.weight = weight
 }
